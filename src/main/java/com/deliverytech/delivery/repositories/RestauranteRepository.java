@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.deliverytech.delivery.dtos.RelatorioVendas;
 import com.deliverytech.delivery.entities.Restaurante;
 
 @Repository
@@ -43,4 +44,10 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 	// Categorias disponíveis
 	@Query("SELECT DISTINCT r.categoria FROM Restaurante r WHERE r.ativo = true ORDER BY r.categoria")
 	List<String> findCategoriasDisponiveis();
+
+	@Query("SELECT r.nome as nomeRestaurante, " + "SUM(p.valorTotal) as totalVendas, "
+			+ "COUNT(p.id) as quantidePedidos " + "FROM Restaurante r "
+			+ "LEFT JOIN Pedido p ON r.id = p.restaurante.id " + "GROUP BY r.id, r.nome")
+	List<RelatorioVendas> relatorioVendasPorRestaurante();
+
 }
