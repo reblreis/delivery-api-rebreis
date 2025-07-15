@@ -70,7 +70,7 @@ public class PedidoService {
 		Produto produto = produtoRepository.findById(produtoId)
 				.orElseThrow(() -> new IllegalArgumentException("Produto não encontrado: " + produtoId));
 
-		if (!produto.isDisponivel()) {
+		if (!produto.getDisponivel()) {
 			throw new IllegalArgumentException("Produto não disponível: " + produto.getNome());
 		}
 

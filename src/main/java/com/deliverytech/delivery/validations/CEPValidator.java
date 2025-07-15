@@ -9,6 +9,7 @@ public class CEPValidator implements ConstraintValidator<ValidCEP, String> {
 
 	private static final Pattern CEP_PATTERN = Pattern.compile("^\\d{5}-?\\d{3}$");
 
+	//Método chamado automaticamente pelo Bean Validation para validar o valor
 	@Override
 	public void initialize(ValidCEP constraintAnnotation) {
 		// Nenhuma inicialização necessária

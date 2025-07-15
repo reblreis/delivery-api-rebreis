@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "produto")
 @Data
 public class Produto {
 
@@ -72,7 +72,7 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public boolean isDisponivel() {
+	public boolean getDisponivel() {
 		return disponivel;
 	}
 
@@ -97,7 +97,7 @@ public class Produto {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "restaurante_id")
+	@JoinColumn(name = "restaurante_id", nullable = false)
 	private Restaurante restaurante;
 
 	@OneToMany(mappedBy = "produto")

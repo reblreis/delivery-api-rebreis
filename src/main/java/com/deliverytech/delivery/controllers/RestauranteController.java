@@ -19,11 +19,13 @@ import com.deliverytech.delivery.dtos.RestauranteDTO;
 import com.deliverytech.delivery.exceptions.ConflictException;
 import com.deliverytech.delivery.exceptions.EntityNotFoundException;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 
+@Tag(name = "Restaurantes", description = "Endpoints de restaurantes")
 @RestController
-@RequestMapping("/api/restaurantes")
+@RequestMapping("/api/restaurantes") // Define a base de rota para este controller
 @Validated
 public class RestauranteController {
 
@@ -36,6 +38,7 @@ public class RestauranteController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<RestauranteDTO> buscarPorId(
+
 			@PathVariable @Positive(message = "ID deve ser positivo") Long id) {
 
 		// Simulação de busca - em aplicação real seria pelo ID

@@ -32,7 +32,7 @@ public class PedidoDTO {
 
 	@NotBlank(message = "CEP é obrigatório")
 	@ValidCEP
-	private String cep;
+	private String cepEntrega;
 
 	@Size(max = 500, message = "Observações não podem exceder 500 caracteres")
 	private String observacoes;
@@ -78,12 +78,12 @@ public class PedidoDTO {
 		this.enderecoEntrega = enderecoEntrega;
 	}
 
-	public String getCep() {
-		return cep;
+	public String getCepEntrega() {
+		return cepEntrega;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setCepEntrega(String cepEntrega) {
+		this.cepEntrega = cepEntrega;
 	}
 
 	public String getObservacoes() {

@@ -19,6 +19,9 @@ import com.deliverytech.delivery.entities.Pedido;
 import com.deliverytech.delivery.enums.StatusPedido;
 import com.deliverytech.delivery.services.PedidoService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Pedidos", description = "Endpoints de pedidos")
 @RestController
 @RequestMapping("/pedidos")
 @CrossOrigin(origins = "*")
