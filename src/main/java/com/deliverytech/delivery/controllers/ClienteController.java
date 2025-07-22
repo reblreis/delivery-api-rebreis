@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.deliverytech.delivery.entities.Cliente;
 import com.deliverytech.delivery.services.ClienteService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -35,7 +36,8 @@ public class ClienteController {
 	/**
 	 * Cadastrar novo cliente
 	 */
-	@PostMapping
+	@Operation(summary = "Serviço para cadastro de clientes.")
+	@PostMapping("/api/clientes")
 	public ResponseEntity<?> cadastrar(@Valid @RequestBody Cliente cliente) {
 		try {
 			Cliente clienteSalvo = clienteService.cadastrar(cliente);
@@ -50,6 +52,7 @@ public class ClienteController {
 	/**
 	 * Listar todos os clientes ativos
 	 */
+	@Operation(summary = "Serviço para consulta de clientes ativos.")
 	@GetMapping
 	public ResponseEntity<List<Cliente>> listar() {
 		List<Cliente> clientes = clienteService.listarAtivos();
@@ -59,6 +62,7 @@ public class ClienteController {
 	/**
 	 * Buscar cliente por ID
 	 */
+	@Operation(summary = "Serviço para consulta de Id de clientes.")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
 		Optional<Cliente> cliente = clienteService.buscarPorId(id);
@@ -73,6 +77,7 @@ public class ClienteController {
 	/**
 	 * Atualizar cliente
 	 */
+	@Operation(summary = "Serviço para atualização de clientes.")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente) {
 		try {
@@ -88,6 +93,7 @@ public class ClienteController {
 	/**
 	 * Inativar cliente (soft delete)
 	 */
+	@Operation(summary = "Serviço para exclusão de clientes.")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> inativar(@PathVariable Long id) {
 		try {
@@ -103,6 +109,7 @@ public class ClienteController {
 	/**
 	 * Buscar clientes por nome
 	 */
+	@Operation(summary = "Serviço para consulta de clientes por nome.")
 	@GetMapping("/buscar")
 	public ResponseEntity<List<Cliente>> buscarPorNome(@RequestParam String nome) {
 		List<Cliente> clientes = clienteService.buscarPorNome(nome);
@@ -112,6 +119,7 @@ public class ClienteController {
 	/**
 	 * Buscar cliente por email
 	 */
+	@Operation(summary = "Serviço para consulta de clientes por email.")
 	@GetMapping("/email/{email}")
 	public ResponseEntity<?> buscarPorEmail(@PathVariable String email) {
 		Optional<Cliente> cliente = clienteService.buscarPorEmail(email);

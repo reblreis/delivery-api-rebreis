@@ -1,106 +1,68 @@
 package com.deliverytech.delivery.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deliverytech.delivery.dtos.LoginRequest;
-import com.deliverytech.delivery.dtos.LoginResponse;
-import com.deliverytech.delivery.dtos.RegisterRequest;
-import com.deliverytech.delivery.dtos.UserResponse;
-import com.deliverytech.delivery.entities.Usuario;
-import com.deliverytech.delivery.security.JwtUtil;
-import com.deliverytech.delivery.security.SecurityUtils;
+import com.deliverytech.delivery.dtos.request.LoginRequest;
+import com.deliverytech.delivery.dtos.request.RegisterRequest;
+import com.deliverytech.delivery.dtos.response.LoginResponse;
 import com.deliverytech.delivery.services.AuthService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Autenticação", description = "Operações de autenticação e autorização")
 @CrossOrigin(origins = "*")
 public class AuthController {
 
 	@Autowired
-	private AuthenticationManager authenticationManager;
-
-	@Autowired
 	private AuthService authService;
 
-	@Autowired
-	private JwtUtil jwtUtil;
-
-	@Value("${jwt.expiration}")
-	private Long jwtExpiration;
-
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
+	@Operation(summary = "Fazer login", description = "Autentica um usuário e retorna um token JWT", tags = {
+			"Autenticação" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Login realizado com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class), examples = @ExampleObject(name = "Login bem-sucedido", value = """
+						{
+							"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+							"tipo": "Bearer",
+							"expiracao": 86400000,
+							"usuario": {
+								"id": 1,
+								"nome": "João Silva",
+								"email": "joao@email.com",
+								"role": "CLIENTE"
+						}
+					}
+					"""))),
 
-		try
+			@ApiResponse(responseCode = "401", description = "Credenciais inválidas") })
 
-		{
-
-			// Autenticar usuário
-			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getSenha()));
-
-			// Carregar detalhes do usuário
-			UserDetails userDetails = authService.loadUserByUsername(loginRequest.getEmail());
-
-			// Gerar token JWT
-			String token = jwtUtil.generateToken(userDetails);
-
-			// Criar resposta
-			Usuario usuario = (Usuario) userDetails;
-			UserResponse userResponse = new UserResponse(usuario);
-			LoginResponse loginResponse = new LoginResponse(token, jwtExpiration, userResponse);
-			return ResponseEntity.ok(loginResponse);
-		} catch (BadCredentialsException e) {
-			return ResponseEntity.status(401).body("Credenciais inválidas");
-		} catch (Exception e) {
-			return ResponseEntity.status(500).body("Erro interno do servidor");
-		}
+	public ResponseEntity<?> login(
+			@Parameter(description = "Credenciais de login") @Valid @RequestBody LoginRequest loginRequest) {
+		return authService.login(loginRequest);
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
-
-		try {
-
-			// Verificar se email já existe
-			if (authService.existsByEmail(registerRequest.getEmail())) {
-				return ResponseEntity.badRequest().body("Email já está em uso");
-			}
-			// Criar novo usuário
-			Usuario novoUsuario = authService.criarUsuario(registerRequest);
-
-			// Retornar dados do usuário (sem token - usuário deve fazer login)
-			UserResponse userResponse = new UserResponse(novoUsuario);
-			return ResponseEntity.status(201).body(userResponse);
-		} catch (Exception e) {
-			return ResponseEntity.status(500).body("Erro ao criar usuário: " + e.getMessage());
-		}
+	@Operation(summary = "Registrar novo usuário", description = "Cria uma nova conta de usuário no sistema", tags = {
+			"Autenticação" })
+	public ResponseEntity<?> register(
+			@Parameter(description = "Dados para criação da conta") @Valid @RequestBody RegisterRequest registerRequest) {
+		return authService.register(registerRequest);
 	}
 
-	@GetMapping("/me")
-	public ResponseEntity<?> getCurrentUser() {
-
-		try {
-
-			Usuario usuarioLogado = SecurityUtils.getCurrentUser();
-			UserResponse userResponse = new UserResponse(usuarioLogado);
-			return ResponseEntity.ok(userResponse);
-		} catch (Exception e) {
-			return ResponseEntity.status(401).body("Usuário não auten􀆟cado");
-		}
-	}
 }

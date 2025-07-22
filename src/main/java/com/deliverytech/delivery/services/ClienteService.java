@@ -56,7 +56,12 @@ public class ClienteService {
 	 */
 	@Transactional(readOnly = true)
 	public List<Cliente> listarAtivos() {
-		return clienteRepository.findByAtivoTrue();
+		try {
+			return clienteRepository.findByAtivoTrue();
+		} catch (Exception e) {
+			e.printStackTrace(); // imprime o erro completo no console
+			throw e;
+		}
 	}
 
 	/**

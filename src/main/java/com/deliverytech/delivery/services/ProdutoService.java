@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.deliverytech.delivery.dtos.ProdutoDTO;
+import com.deliverytech.delivery.dtos.request.ProdutoRequest;
+import com.deliverytech.delivery.dtos.response.ProdutoResponse;
 import com.deliverytech.delivery.entities.Produto;
 import com.deliverytech.delivery.entities.Restaurante;
 import com.deliverytech.delivery.repositories.ProdutoRepository;
@@ -28,18 +33,33 @@ public class ProdutoService {
 	 * Cadastrar novo produto a partir do DTO
 	 */
 	@Transactional
-	public Produto cadastrar(ProdutoDTO produtoDTO) {
-		validarDadosProduto(produtoDTO);
+	public ProdutoResponse criar(ProdutoRequest produtoRequest) {
+		ProdutoDTO dto = new ProdutoDTO();
+		dto.setNome(produtoRequest.getNome());
+		dto.setDescricao(produtoRequest.getDescricao());
+		dto.setPreco(produtoRequest.getPreco());
+		dto.setCategoria(produtoRequest.getCategoria());
+		dto.setDisponivel(produtoRequest.getDisponivel());
+		dto.setRestauranteId(produtoRequest.getRestauranteId());
+
+		Produto produto = criar(dto); // usa o método já existente
+		return new ProdutoResponse(produto); // crie um construtor se não tiver
+	}
+
+	@Transactional
+	public Produto criar(ProdutoDTO dto) {
+		validarDadosProduto(dto);
+
+		Restaurante restaurante = restauranteRepository.findById(dto.getRestauranteId()).orElseThrow(
+				() -> new IllegalArgumentException("Restaurante não encontrado: " + dto.getRestauranteId()));
 
 		Produto produto = new Produto();
-		produto.setNome(produtoDTO.getNome());
-		produto.setDescricao(produtoDTO.getDescricao());
-		produto.setPreco(produtoDTO.getPreco());
-		produto.setCategoria(produtoDTO.getCategoria());
-		produto.setDisponivel(produtoDTO.getDisponivel());
-
-		produto.setRestaurante(restauranteRepository.findById(produtoDTO.getRestauranteId()).orElseThrow(
-				() -> new IllegalArgumentException("Restaurante não encontrado: " + produtoDTO.getRestauranteId())));
+		produto.setNome(dto.getNome());
+		produto.setDescricao(dto.getDescricao());
+		produto.setPreco(dto.getPreco());
+		produto.setCategoria(dto.getCategoria());
+		produto.setDisponivel(dto.getDisponivel());
+		produto.setRestaurante(restaurante);
 
 		return produtoRepository.save(produto);
 	}
@@ -59,6 +79,29 @@ public class ProdutoService {
 		}
 
 		return produtosDTO;
+	}
+
+	public Page<ProdutoResponse> listar(Pageable pageable, Long restauranteId, String categoria, Boolean disponivel) {
+		List<Produto> produtos;
+
+		if (restauranteId != null) {
+			produtos = buscarPorRestaurante(restauranteId);
+		} else if (categoria != null) {
+			produtos = buscarPorCategoria(categoria);
+		} else if (disponivel != null && disponivel) {
+			produtos = buscarDisponiveis();
+		} else {
+			produtos = produtoRepository.findAll();
+		}
+
+		// Paginação manual (opcionalmente, crie um método customizado paginado no
+		// repository)
+		int start = (int) pageable.getOffset();
+		int end = Math.min((start + pageable.getPageSize()), produtos.size());
+
+		List<ProdutoResponse> pageContent = produtos.subList(start, end).stream().map(ProdutoResponse::new).toList();
+
+		return new PageImpl<>(pageContent, pageable, produtos.size());
 	}
 
 	/**

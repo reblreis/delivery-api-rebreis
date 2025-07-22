@@ -22,7 +22,6 @@ public class RestauranteService {
 	 * Cadastrar novo restaurante
 	 */
 	public Restaurante cadastrar(Restaurante restaurante) {
-		// Validar nome único
 		if (restauranteRepository.findByNome(restaurante.getNome()).isPresent()) {
 			throw new IllegalArgumentException("Restaurante já cadastrado: " + restaurante.getNome());
 		}

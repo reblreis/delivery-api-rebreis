@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.deliverytech.delivery.entities.Cliente;
+import com.deliverytech.delivery.entities.Usuario;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
@@ -39,12 +40,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	// Contar clientes ativos
 	@Query("SELECT COUNT(c) FROM Cliente c WHERE c.ativo = true")
 	Long countClientesAtivos();
-	
-	@Query(value = "SELECT c.nome, COUNT(p.id) as total_pedidos " +
-		            "FROM cliente c " +
-		            "LEFT JOIN pedido p ON c.id = p.cliente_id " +
-		            "GROUP BY c.id, c.nome " +
-		            "ORDER BY total_pedidos DESC " +
-		            "LIMIT 10", nativeQuery = true)
+
+	@Query(value = "SELECT c.nome, COUNT(p.id) as total_pedidos " + "FROM cliente c "
+			+ "LEFT JOIN pedido p ON c.id = p.cliente_id " + "GROUP BY c.id, c.nome " + "ORDER BY total_pedidos DESC "
+			+ "LIMIT 10", nativeQuery = true)
 	List<Object[]> rankingClientesPorPedidos();
+
+	Optional<Cliente> findByUsuario(Usuario usuario);
+
 }

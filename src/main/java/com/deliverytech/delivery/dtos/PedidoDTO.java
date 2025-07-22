@@ -1,9 +1,11 @@
 package com.deliverytech.delivery.dtos;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.deliverytech.delivery.validations.ValidCEP;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -39,8 +41,12 @@ public class PedidoDTO {
 
 	@NotBlank(message = "Forma de pagamento é obrigatória")
 	@Pattern(regexp = "^(DINHEIRO|CARTAO_CREDITO|CARTAO_DEBITO|PIX)$", message = "Forma de pagamento deve ser: DINHEIRO,CARTAO_CREDITO,CARTAO_DEBITO ou PIX")
-
 	private String formaPagamento;
+
+	@Schema(description = "Taxa de entrega aplicada ao pedido", example = "5.00")
+	@NotNull(message = "A taxa de entrega é obrigatória")
+	@Positive(message = "A taxa de entrega deve ser um valor positivo")
+	private BigDecimal taxaEntrega;
 
 	public PedidoDTO() {
 
@@ -100,6 +106,14 @@ public class PedidoDTO {
 
 	public void setFormaPagamento(String formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+
+	public BigDecimal getTaxaEntrega() {
+		return taxaEntrega;
+	}
+
+	public void setTaxaEntrega(BigDecimal taxaEntrega) {
+		this.taxaEntrega = taxaEntrega;
 	}
 
 }

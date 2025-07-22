@@ -1,5 +1,7 @@
 package com.deliverytech.delivery.dtos;
 
+import com.deliverytech.delivery.entities.ItemPedido;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +21,11 @@ public class ItemPedidoDTO {
 
 	@Size(max = 200, message = "Observações não podem exceder 200 caracteres")
 	private String observacoes;
+
+	public ItemPedidoDTO(ItemPedido item) {
+		this.produtoId = item.getProduto().getId();
+		this.quantidade = item.getQuantidade();
+	}
 
 	public ItemPedidoDTO() {
 		// TODO Auto-generated constructor stub

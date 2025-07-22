@@ -1,4 +1,4 @@
-package com.deliverytech.delivery.dtos;
+package com.deliverytech.delivery.dtos.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

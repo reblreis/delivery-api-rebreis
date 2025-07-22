@@ -1,4 +1,6 @@
-package com.deliverytech.delivery.dtos;
+package com.deliverytech.delivery.dtos.response;
+
+import com.deliverytech.delivery.entities.Usuario;
 
 public class LoginResponse {
 
@@ -12,11 +14,12 @@ public class LoginResponse {
 
 	}
 
-	public LoginResponse(String token, Long expiracao, UserResponse usuario) {
+	public LoginResponse(String token, String tipo, Long expiracao, Usuario usuario) {
+		super();
 		this.token = token;
+		this.tipo = tipo;
 		this.expiracao = expiracao;
-		this.usuario = usuario;
-
+		this.usuario = new UserResponse(usuario);
 	}
 
 	// Getters e Setters

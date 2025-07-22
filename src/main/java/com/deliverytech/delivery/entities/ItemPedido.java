@@ -2,18 +2,20 @@ package com.deliverytech.delivery.entities;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import lombok.Data;
 
 @Entity
 @Table(name = "itens_pedido")
-@Data
 public class ItemPedido {
 
 	@Id
@@ -76,14 +78,22 @@ public class ItemPedido {
 
 	@ManyToOne
 	@JoinColumn(name = "pedido_id")
+	@JsonIgnore
 	private Pedido pedido;
 
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
+	@JsonIgnore
 	private Produto produto;
 
 	public BigDecimal calcularSubtotal() {
 		return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+	}
+
+	@PrePersist
+	@PreUpdate
+	public void calcularAntesDeSalvar() {
+		this.subtotal = calcularSubtotal();
 	}
 
 }

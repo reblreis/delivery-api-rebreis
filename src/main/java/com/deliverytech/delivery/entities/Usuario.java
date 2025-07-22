@@ -18,9 +18,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", uniqueConstraints = { @UniqueConstraint(columnNames = "email") // Garante unicidade do email
+})
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;

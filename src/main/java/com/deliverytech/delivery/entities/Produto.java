@@ -3,6 +3,8 @@ package com.deliverytech.delivery.entities;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -98,6 +100,7 @@ public class Produto {
 
 	@ManyToOne
 	@JoinColumn(name = "restaurante_id", nullable = false)
+	@JsonIgnore
 	private Restaurante restaurante;
 
 	@OneToMany(mappedBy = "produto")

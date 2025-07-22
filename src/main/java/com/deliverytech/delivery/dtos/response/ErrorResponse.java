@@ -1,4 +1,4 @@
-package com.deliverytech.delivery.dtos;
+package com.deliverytech.delivery.dtos.response;
 
 import java.time.LocalDateTime;
 import java.util.Map;

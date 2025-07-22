@@ -1,17 +1,21 @@
 package com.deliverytech.delivery.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.deliverytech.delivery.dtos.request.PedidoRequest;
+import com.deliverytech.delivery.dtos.response.PedidoResponse;
 import com.deliverytech.delivery.entities.Cliente;
 import com.deliverytech.delivery.entities.ItemPedido;
 import com.deliverytech.delivery.entities.Pedido;
 import com.deliverytech.delivery.entities.Produto;
 import com.deliverytech.delivery.entities.Restaurante;
+import com.deliverytech.delivery.enums.FormaPagamento;
 import com.deliverytech.delivery.enums.StatusPedido;
 import com.deliverytech.delivery.repositories.ClienteRepository;
 import com.deliverytech.delivery.repositories.PedidoRepository;
@@ -34,6 +38,9 @@ public class PedidoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
+	@Autowired
+	private AuthService authService;
+
 	/**
 	 * Criar novo pedido
 	 */
@@ -44,11 +51,11 @@ public class PedidoService {
 		Restaurante restaurante = restauranteRepository.findById(restauranteId)
 				.orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado: " + restauranteId));
 
-		if (!cliente.isAtivo()) {
+		if (!cliente.getAtivo()) {
 			throw new IllegalArgumentException("Cliente inativo não pode fazer pedidos");
 		}
 
-		if (!restaurante.isAtivo()) {
+		if (!restaurante.getAtivo()) {
 			throw new IllegalArgumentException("Restaurante não está disponível");
 		}
 
@@ -126,8 +133,10 @@ public class PedidoService {
 	 * Listar pedidos por cliente
 	 */
 	@Transactional(readOnly = true)
-	public List<Pedido> listarPorCliente(Long clienteId) {
-		return pedidoRepository.findByClienteIdOrderByDataPedidoDesc(clienteId);
+	public Page<PedidoResponse> listarPorCliente(Pageable pageable) {
+		Long clienteId = authService.getClienteIdLogado(); // Você precisa implementar isso
+		Page<Pedido> pedidos = pedidoRepository.findByClienteId(clienteId, pageable);
+		return pedidos.map(PedidoResponse::new); // ou usar mapper, se preferir
 	}
 
 	/**
@@ -164,13 +173,62 @@ public class PedidoService {
 	/**
 	 * Atualizar status de um pedido
 	 */
-	public Pedido atualizarStatus(Long pedidoId, StatusPedido status) {
+	public PedidoResponse atualizarStatus(Long pedidoId, StatusPedido status) {
 		Pedido pedido = buscarPorId(pedidoId)
 				.orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado: " + pedidoId));
 
 		pedido.setStatus(status);
 
-		return pedidoRepository.save(pedido);
+		Pedido atualizado = pedidoRepository.save(pedido);
+		return new PedidoResponse(atualizado); // Corrigido: converte para DTO
+	}
+
+	public PedidoResponse cadastrar(PedidoRequest request) {
+		Cliente cliente = clienteRepository.findById(request.getClienteId())
+				.orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
+
+		Restaurante restaurante = restauranteRepository.findById(request.getRestauranteId())
+				.orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado"));
+
+		Pedido pedido = new Pedido();
+		pedido.setCliente(cliente);
+		pedido.setRestaurante(restaurante);
+		pedido.setStatus(StatusPedido.PENDENTE);
+		pedido.setEnderecoEntrega(request.getEnderecoEntrega());
+		pedido.setCepEntrega(request.getCepEntrega());
+		pedido.setFormaPagamento(request.getFormaPagamento());
+
+		// Adiciona itens
+		request.getItens().forEach(itemRequest -> {
+			Produto produto = produtoRepository.findById(itemRequest.getProdutoId()).orElseThrow(
+					() -> new IllegalArgumentException("Produto não encontrado: " + itemRequest.getProdutoId()));
+
+			ItemPedido item = new ItemPedido();
+			item.setPedido(pedido);
+			item.setProduto(produto);
+			item.setQuantidade(itemRequest.getQuantidade());
+			item.setPrecoUnitario(produto.getPreco());
+			item.calcularSubtotal();
+
+			pedido.adicionarItem(item);
+		});
+
+		Pedido salvo = pedidoRepository.save(pedido);
+		return new PedidoResponse(salvo); // ou use um mapper, se tiver
+	}
+
+	public PedidoResponse cadastrarNovoPedido() {
+		Cliente cliente = clienteRepository.findById(1L) // ou qualquer ID real
+				.orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado"));
+
+		Restaurante restaurante = restauranteRepository.findById(1L)
+				.orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado"));
+
+		FormaPagamento formaPagamento = FormaPagamento.valueOf("CARTAO".toUpperCase());
+		Pedido novoPedido = Pedido.criarNovo(cliente, restaurante, "Rua A", "12345-678", formaPagamento);
+
+		Pedido salvo = pedidoRepository.save(novoPedido);
+		return new PedidoResponse(salvo);
 	}
 
 }

@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DeliveryApiApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void somaSimples() {
+		int resultado = 2 + 3;
+		org.junit.jupiter.api.Assertions.assertEquals(5, resultado);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.deliverytech.delivery.entities.Cliente;
@@ -13,14 +14,21 @@ import com.deliverytech.delivery.entities.ItemPedido;
 import com.deliverytech.delivery.entities.Pedido;
 import com.deliverytech.delivery.entities.Produto;
 import com.deliverytech.delivery.entities.Restaurante;
+import com.deliverytech.delivery.entities.Usuario;
+import com.deliverytech.delivery.enums.FormaPagamento;
+import com.deliverytech.delivery.enums.Role;
 import com.deliverytech.delivery.enums.StatusPedido;
 import com.deliverytech.delivery.repositories.ClienteRepository;
 import com.deliverytech.delivery.repositories.PedidoRepository;
 import com.deliverytech.delivery.repositories.ProdutoRepository;
 import com.deliverytech.delivery.repositories.RestauranteRepository;
+import com.deliverytech.delivery.repositories.UsuarioRepository;
 
 @Component
 public class DataLoader implements CommandLineRunner {
+
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -34,6 +42,13 @@ public class DataLoader implements CommandLineRunner {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("=== INICIANDO CARGA DE DADOS DE TESTE ===");
@@ -42,7 +57,11 @@ public class DataLoader implements CommandLineRunner {
 		pedidoRepository.deleteAll();
 		produtoRepository.deleteAll();
 		restauranteRepository.deleteAll();
+		usuarioRepository.deleteAll();
 		clienteRepository.deleteAll();
+
+		// Inserir usuário administrador primeiro
+		inserirUsuarioAdmin();
 
 		// Inserir dados de teste
 		inserirClientes();
@@ -60,12 +79,40 @@ public class DataLoader implements CommandLineRunner {
 	private void inserirClientes() {
 		System.out.println("--- Inserindo Clientes ---");
 
+		Usuario usuario1 = usuarioRepository.findByEmail("joao@email.com").orElseGet(() -> {
+			Usuario u = new Usuario();
+			u.setNome("João");
+			u.setEmail("joao@email.com");
+			u.setSenha(passwordEncoder.encode("123456"));
+			u.setRole(Role.CLIENTE);
+			return usuarioRepository.save(u);
+		});
+
+		Usuario usuario2 = usuarioRepository.findByEmail("maria@email.com").orElseGet(() -> {
+			Usuario u = new Usuario();
+			u.setNome("Maria");
+			u.setEmail("maria@email.com");
+			u.setSenha(passwordEncoder.encode("123"));
+			u.setRole(Role.CLIENTE);
+			return usuarioRepository.save(u);
+		});
+
+		Usuario usuario3 = usuarioRepository.findByEmail("pedro@email.com").orElseGet(() -> {
+			Usuario u = new Usuario();
+			u.setNome("Pedro");
+			u.setEmail("pedro@email.com");
+			u.setSenha(passwordEncoder.encode("123"));
+			u.setRole(Role.CLIENTE);
+			return usuarioRepository.save(u);
+		});
+
 		Cliente cliente1 = new Cliente();
 		cliente1.setNome("João Silva");
 		cliente1.setEmail("joao@email.com");
 		cliente1.setTelefone("11999999999");
 		cliente1.setEndereco("Rua A, 123");
 		cliente1.setAtivo(true);
+		cliente1.setUsuario(usuario1); // associação
 
 		Cliente cliente2 = new Cliente();
 		cliente2.setNome("Maria Santos");
@@ -73,6 +120,7 @@ public class DataLoader implements CommandLineRunner {
 		cliente2.setTelefone("11888888888");
 		cliente2.setEndereco("Rua B, 456");
 		cliente2.setAtivo(true);
+		cliente2.setUsuario(usuario2); // associação
 
 		Cliente cliente3 = new Cliente();
 		cliente3.setNome("Pedro Oliveira");
@@ -80,9 +128,10 @@ public class DataLoader implements CommandLineRunner {
 		cliente3.setTelefone("11777777777");
 		cliente3.setEndereco("Rua C, 789");
 		cliente3.setAtivo(false);
+		cliente3.setUsuario(usuario3); // associação
 
 		clienteRepository.saveAll(Arrays.asList(cliente1, cliente2, cliente3));
-		System.out.println("✓ 3 clientes inseridos");
+		System.out.println("✓ 3 clientes inseridos com usuários associados");
 	}
 
 	// Método inserirRestaurantes
@@ -216,6 +265,7 @@ public class DataLoader implements CommandLineRunner {
 		Pedido pedido1 = new Pedido();
 		pedido1.setDataPedido(LocalDate.now());
 		pedido1.setEnderecoEntrega("Rua X, 123");
+		pedido1.setCepEntrega("12345-678");
 		pedido1.setNumeroPedido("PED-0001");
 		pedido1.setSubtotal(produto1.getPreco());
 		pedido1.setTaxaEntrega(restaurante1.getTaxaEntrega());
@@ -233,11 +283,13 @@ public class DataLoader implements CommandLineRunner {
 		item1.setPedido(pedido1);
 
 		pedido1.getItens().add(item1);
+		pedido1.calcularTotais();
 
 		// Pedido 2
 		Pedido pedido2 = new Pedido();
 		pedido2.setDataPedido(LocalDate.now());
 		pedido2.setEnderecoEntrega("Av. Y, 456");
+		pedido2.setCepEntrega("98765-432");
 		pedido2.setNumeroPedido("PED-0002");
 		BigDecimal subtotal2 = produto2.getPreco().add(produto3.getPreco());
 		pedido2.setSubtotal(subtotal2);
@@ -264,10 +316,28 @@ public class DataLoader implements CommandLineRunner {
 
 		pedido2.getItens().add(item2);
 		pedido2.getItens().add(item3);
+		pedido2.calcularTotais();
 
+		pedido1.setFormaPagamento(FormaPagamento.DINHEIRO);
+		pedido2.setFormaPagamento(FormaPagamento.CARTAO_CREDITO);
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
 
 		System.out.println("✓ 2 pedidos inseridos");
 	}
 
+	private void inserirUsuarioAdmin() {
+		System.out.println("--- Inserindo usuário ADMIN ---");
+
+		usuarioRepository.findByEmail("admin@delivery.com").orElseGet(() -> {
+			Usuario admin = new Usuario();
+			admin.setNome("Administrador");
+			admin.setEmail("admin@delivery.com");
+			admin.setSenha(passwordEncoder.encode("admin123"));
+			admin.setRole(Role.ADMIN);
+			admin.setAtivo(true);
+			Usuario salvo = usuarioRepository.save(admin);
+			usuarioRepository.flush(); // opcional: garante persistência imediata
+			return salvo;
+		});
+	}
 }

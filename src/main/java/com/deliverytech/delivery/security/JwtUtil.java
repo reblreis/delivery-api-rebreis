@@ -1,5 +1,6 @@
 package com.deliverytech.delivery.security;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,10 @@ public class JwtUtil {
 	private Long expiration;
 
 	private SecretKey getSigningKey() {
+		byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
+		if (keyBytes.length < 32) {
+			throw new IllegalArgumentException("A chave JWT (jwt.secret) deve ter no mínimo 32 bytes");
+		}
 		return Keys.hmacShaKeyFor(secret.getBytes());
 	}
 
@@ -92,4 +97,9 @@ public class JwtUtil {
 		final String username = extractUsername(token);
 		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 	}
+
+	public Long getExpiracao() {
+		return expiration;
+	}
+
 }

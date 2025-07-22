@@ -44,11 +44,7 @@ public class ProdutoDTO {
 	@Pattern(regexp = "^(https?://).*\\.(jpg|jpeg|png|gif)$", message = "URL da imagem deve ser válida e ter formato JPG, JPEG,PNG ou GIF")
 	private String imagemUrl;
 	@AssertTrue(message = "Produto deve estar disponível por padrão")
-	private Boolean disponivel = true;	
-	
-	public ProdutoDTO() {
-		
-	}
+	private Boolean disponivel = true;
 
 	public ProdutoDTO(Long id, String nome, String descricao, BigDecimal preco, String categoria, Boolean disponivel) {
 		this.id = id;

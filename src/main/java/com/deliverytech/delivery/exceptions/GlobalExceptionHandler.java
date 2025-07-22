@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import com.deliverytech.delivery.dtos.ErrorResponse;
+import com.deliverytech.delivery.dtos.response.ErrorResponse;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
