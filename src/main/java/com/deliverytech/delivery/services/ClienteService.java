@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,11 @@ public class ClienteService {
 		// Validar email único
 		if (clienteRepository.existsByEmail(cliente.getEmail())) {
 			throw new IllegalArgumentException("Email já cadastrado: " + cliente.getEmail());
+		}
+
+		// Validar CPF único
+		if (clienteRepository.existsByCpf(cliente.getCpf())) {
+			throw new IllegalArgumentException("CPF já cadastrado: " + cliente.getCpf());
 		}
 
 		// Validações de negócio
@@ -84,6 +91,11 @@ public class ClienteService {
 		cliente.setEndereco(clienteAtualizado.getEndereco());
 
 		return clienteRepository.save(cliente);
+	}
+
+	@Transactional(readOnly = true)
+	public Page<Cliente> listarTodos(Pageable pageable) {
+		return clienteRepository.findAll(pageable);
 	}
 
 	/**

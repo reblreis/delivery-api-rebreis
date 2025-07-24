@@ -3,6 +3,8 @@ package com.deliverytech.delivery.exceptions;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,6 +17,8 @@ import com.deliverytech.delivery.dtos.response.ErrorResponse;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+	private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex,
@@ -57,10 +61,13 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleGenericException(Exception ex, WebRequest request) {
+		log.error("Erro inesperado no sistema: ", ex); // Isso vai mostrar o stack trace no console
+
 		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),
 				"Erro interno do servidor", "Ocorreu um erro inesperado. Tente novamente mais tarde.",
 				request.getDescription(false).replace("uri=", ""));
 		errorResponse.setErrorCode("INTERNAL_ERROR");
+
 		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

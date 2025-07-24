@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.deliverytech.delivery.dtos.request.ClienteRequest;
+import com.deliverytech.delivery.dtos.response.ClienteResponse;
 import com.deliverytech.delivery.entities.Cliente;
 import com.deliverytech.delivery.services.ClienteService;
 
@@ -38,15 +39,19 @@ public class ClienteController {
 	 */
 	@Operation(summary = "Serviço para cadastro de clientes.")
 	@PostMapping("/api/clientes")
-	public ResponseEntity<?> cadastrar(@Valid @RequestBody Cliente cliente) {
-		try {
-			Cliente clienteSalvo = clienteService.cadastrar(cliente);
-			return ResponseEntity.status(HttpStatus.CREATED).body(clienteSalvo);
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor");
-		}
+	public ResponseEntity<ClienteResponse> criarCliente(@RequestBody @Valid ClienteRequest request) {
+		Cliente cliente = new Cliente();
+		cliente.setNome(request.getNome());
+		cliente.setEmail(request.getEmail());
+		cliente.setTelefone(request.getTelefone());
+		cliente.setEndereco(request.getEndereco());
+
+		Cliente salvo = clienteService.cadastrar(cliente);
+
+		ClienteResponse response = new ClienteResponse(salvo.getId(), salvo.getNome(), salvo.getEmail(),
+				salvo.getTelefone(), salvo.getEndereco());
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
 	/**
@@ -68,7 +73,10 @@ public class ClienteController {
 		Optional<Cliente> cliente = clienteService.buscarPorId(id);
 
 		if (cliente.isPresent()) {
-			return ResponseEntity.ok(cliente.get());
+			Cliente c = cliente.get();
+			ClienteResponse response = new ClienteResponse(c.getId(), c.getNome(), c.getEmail(), c.getTelefone(),
+					c.getEndereco());
+			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -78,11 +86,21 @@ public class ClienteController {
 	 * Atualizar cliente
 	 */
 	@Operation(summary = "Serviço para atualização de clientes.")
-	@PutMapping("/{id}")
-	public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente) {
+	public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody ClienteRequest request) {
 		try {
+			Cliente cliente = new Cliente();
+			cliente.setNome(request.getNome());
+			cliente.setEmail(request.getEmail());
+			cliente.setTelefone(request.getTelefone());
+			cliente.setEndereco(request.getEndereco());
+
 			Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
-			return ResponseEntity.ok(clienteAtualizado);
+
+			ClienteResponse response = new ClienteResponse(clienteAtualizado.getId(), clienteAtualizado.getNome(),
+					clienteAtualizado.getEmail(), clienteAtualizado.getTelefone(), clienteAtualizado.getEndereco());
+
+			return ResponseEntity.ok(response);
+
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
 		} catch (Exception e) {

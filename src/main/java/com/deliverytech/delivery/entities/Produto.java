@@ -34,6 +34,8 @@ public class Produto {
 
 	private boolean disponivel;
 
+	private int estoque;
+
 	public Long getId() {
 		return id;
 	}
@@ -96,6 +98,10 @@ public class Produto {
 
 	public void setItensPedido(List<ItemPedido> itensPedido) {
 		this.itensPedido = itensPedido;
+	}
+
+	public void setEstoque(int estoque) {
+		this.estoque = estoque;
 	}
 
 	@ManyToOne

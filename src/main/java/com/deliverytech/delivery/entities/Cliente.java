@@ -3,6 +3,8 @@ package com.deliverytech.delivery.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,6 +27,8 @@ public class Cliente {
 	private Long id;
 
 	private String nome;
+
+	private String cpf;
 
 	private String email;
 
@@ -52,6 +56,14 @@ public class Cliente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getCpf() {
+		return cpf;
 	}
 
 	public String getEmail() {
@@ -98,6 +110,7 @@ public class Cliente {
 	}
 
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Pedido> pedidos;
 
 	public void inativar() {
