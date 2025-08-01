@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +35,7 @@ public class ProdutoService {
 	 * Cadastrar novo produto a partir do DTO
 	 */
 	@Transactional
+	@CacheEvict(value = "produtosPorCategoria", allEntries = true)
 	public ProdutoResponse criar(ProdutoRequest produtoRequest) {
 		ProdutoDTO dto = new ProdutoDTO();
 		dto.setNome(produtoRequest.getNome());
@@ -47,6 +50,7 @@ public class ProdutoService {
 	}
 
 	@Transactional
+	@CacheEvict(value = "produtosPorCategoria", allEntries = true)
 	public Produto criar(ProdutoDTO dto) {
 		validarDadosProduto(dto);
 
@@ -115,7 +119,7 @@ public class ProdutoService {
 	/**
 	 * Atualizar produto a partir do DTO
 	 */
-	@Transactional
+	@CacheEvict(value = "produtosPorCategoria", allEntries = true)
 	public Produto atualizar(Long id, ProdutoDTO produtoDTO) {
 		Produto produtoExistente = produtoRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Produto não encontrado: " + id));
@@ -137,7 +141,7 @@ public class ProdutoService {
 	/**
 	 * Excluir produto
 	 */
-	@Transactional
+	@CacheEvict(value = "produtosPorCategoria", allEntries = true)
 	public void excluir(Long id) {
 		Produto produto = produtoRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Produto não encontrado: " + id));
@@ -167,6 +171,7 @@ public class ProdutoService {
 		return produtoRepository.findByRestauranteAndDisponivelTrue(restaurante);
 	}
 
+	@CacheEvict(value = "produtosPorCategoria", allEntries = true)
 	public Produto inativar(Long id) {
 		Produto produto = produtoRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Produto não encontrado: " + id));
@@ -183,6 +188,7 @@ public class ProdutoService {
 		return produtoRepository.findByDisponivelTrue();
 	}
 
+	@Cacheable(value = "produtosPorCategoria")
 	public List<Produto> buscarPorCategoria(String categoria) {
 		return produtoRepository.findByCategoriaAndDisponivelTrue(categoria);
 	}
@@ -190,4 +196,10 @@ public class ProdutoService {
 	public List<Produto> buscarPorFaixaDePreco(BigDecimal preco) {
 		return produtoRepository.findByPrecoLessThanEqualAndDisponivelTrue(preco);
 	}
+
+	@CacheEvict(value = "produtosPorCategoria", allEntries = true)
+	public Produto salvarProduto(Produto produto) {
+		return produtoRepository.save(produto);
+	}
+
 }

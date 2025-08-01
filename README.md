@@ -18,6 +18,7 @@ API REST para sistema de delivery desenvolvida com **Java 21** e **Spring Boot 3
 - Logback (logs estruturados)
 - Maven
 - JaCoCo (cobertura de testes)
+- Spring Cache (ConcurrentMap)
 
 ---
 
@@ -33,6 +34,35 @@ API REST para sistema de delivery desenvolvida com **Java 21** e **Spring Boot 3
   - Métricas expostas para Prometheus
   - Logging estruturado com correlação de requisições
   - Tracing distribuído com Spring Cloud Sleuth
+- Cache de produtos por categoria com @Cacheable/@CacheEvict
+
+---
+
+## 🧠 Cache de Produtos por Categoria (NOVO)
+
+### ✅ Objetivo
+Melhorar a performance do sistema reduzindo consultas repetidas ao banco de dados ao listar produtos por categoria.
+
+### Estratégia
+- Utilizado **ConcurrentMapCache** (in-memory).
+- Nome do cache: `produtosPorCategoria`
+- Anotações utilizadas:
+  - `@Cacheable`: para armazenar produtos por categoria.
+  - `@CacheEvict`: para limpar o cache ao salvar novos produtos.
+
+### Exemplo:
+@Cacheable("produtosPorCategoria")
+public List<Produto> buscarPorCategoria(String categoria) { ... }
+
+@CacheEvict(value = "produtosPorCategoria", allEntries = true)
+public Produto salvarProduto(Produto produto) { ... }
+
+### Teste automatizado
+- Verifica se o cache é utilizado e invalidado corretamente com uso de `@MockBean` e `verify(...)` do Mockito.
+- Resultado: ✅ 100% verde após configuração correta do cache.
+
+### Prints de validação
+Antes (erro) e Depois (sucesso): test-falhou.png, test-passou.png
 
 ---
 
@@ -41,6 +71,7 @@ API REST para sistema de delivery desenvolvida com **Java 21** e **Spring Boot 3
 - Testes unitários e de integração com cobertura JaCoCo
 - Pacote `integration` dedicado para testes de integração
 - Cobertura de testes para controllers, serviços e validações
+- Testes de cache com simulação de chamadas e verificação de invocação
 
 ---
 
@@ -128,5 +159,5 @@ _Arquitetura de Sistemas — Turma 01_
 - 📊 Métricas com Actuator, Micrometer e Prometheus
 - 📑 Logging estruturado com correlação
 - 🔭 Tracing distribuído com Spring Cloud Sleuth
-
+- 🧠 Cache de produtos por categoria com @Cacheable/@CacheEvict + teste automatizado
 ---

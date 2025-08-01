@@ -1,6 +1,7 @@
 package com.deliverytech.delivery.security;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,8 +65,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) {
 		String path = request.getRequestURI();
-		return path.startsWith("/api/auth") || path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")
-				|| path.startsWith("/swagger-resources") || path.startsWith("/webjars")
-				|| path.startsWith("/h2-console") || path.startsWith("/actuator");
+
+		// Sempre permite as rotas públicas
+		if (path.startsWith("/api/auth") || path.startsWith("/h2-console") || path.startsWith("/actuator")) {
+			return true;
+		}
+
+		// Permite Swagger apenas fora do profile "prod"
+		String profilesParam = request.getServletContext().getInitParameter("spring.profiles.active");
+		String[] profiles = profilesParam != null ? profilesParam.split(",") : new String[0];
+
+		boolean isProd = Arrays.asList(profiles).contains("prod");
+
+		if (!isProd && (path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")
+				|| path.startsWith("/swagger-resources") || path.startsWith("/webjars"))) {
+			return true;
+		}
+
+		return false;
 	}
 }

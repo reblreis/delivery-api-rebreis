@@ -17,8 +17,11 @@ import io.swagger.v3.oas.models.servers.Server;
 @Configuration
 public class SwaggerConfig {
 
-	@Value("${server.port:8080}")
-	private String serverPort;
+	private final String serverPort;
+
+	public SwaggerConfig(@Value("${server.port:8080}") String serverPort) {
+		this.serverPort = serverPort;
+	}
 
 	@Bean
 	public OpenAPI customOpenAPI() {
@@ -43,4 +46,5 @@ public class SwaggerConfig {
 		return new SecurityScheme().type(SecurityScheme.Type.HTTP).bearerFormat("JWT").scheme("bearer")
 				.description("Insira o token JWT obtido no endpoint /api/auth/login");
 	}
+
 }

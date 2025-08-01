@@ -2,13 +2,12 @@ package com.deliverytech.delivery.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.deliverytech.delivery.security.JwtAuthenticationFilter;
 
@@ -17,24 +16,32 @@ import com.deliverytech.delivery.security.JwtAuthenticationFilter;
 public class SecurityConfig {
 
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
+	private final Environment environment;
 
-	public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+	public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, Environment environment) {
 		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+		this.environment = environment;
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.cors(cors -> cors.disable()).csrf(csrf -> csrf.disable())
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**", "/api/restaurantes",
-						"/api/produtos", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**",
-						"/swagger-resources/**", "/webjars/**", "/h2-console/**", "/actuator/health").permitAll()
-						.anyRequest().authenticated())
-				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-				.headers(headers -> headers.frameOptions(frame -> frame.disable())); // H2 console
+		http
+			.authorizeHttpRequests(auth -> auth
+				.requestMatchers(
+					"/api/auth/**",
+					"/v3/api-docs/**",
+					"/swagger-ui/**",
+					"/swagger-ui.html",
+					"/swagger-ui/index.html", 
+					"/actuator/**"
+				).permitAll()
+				.anyRequest().authenticated()
+			)
+			.csrf(csrf -> csrf.disable());
 
 		return http.build();
 	}
+
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

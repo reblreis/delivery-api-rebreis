@@ -104,6 +104,40 @@ public class Produto {
 		this.estoque = estoque;
 	}
 
+	public Produto() {
+
+	}
+
+	public Produto(Long id, String nome, String categoria, BigDecimal preco) {
+		this.id = id;
+		this.nome = nome;
+		this.categoria = categoria;
+		this.preco = preco;
+		this.disponivel = true;
+		this.estoque = 10;
+		// restaurante deve ser setado separadamente se for necessário
+	}
+
+	public Produto(Long id, String nome, String descricao, BigDecimal preco, String categoria, boolean disponivel,
+			int estoque, Restaurante restaurante, List<ItemPedido> itensPedido) {
+
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.categoria = categoria;
+		this.disponivel = disponivel;
+		this.estoque = estoque;
+		this.restaurante = restaurante;
+		this.itensPedido = itensPedido;
+	}
+
+	public Produto(String nome, String descricao, BigDecimal preco) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "restaurante_id", nullable = false)
 	@JsonIgnore

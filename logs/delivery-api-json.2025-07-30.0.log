@@ -1,0 +1,2467 @@
+{"timestamp":"2025-07-30 08:47:11.600","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"Starting DeliveryApiApplication using Java 21.0.7 with PID 13740 (C:\FAT_Java_2025\workspace - local\delivery-api\target\classes started by rebre in C:\FAT_Java_2025\workspace - local\delivery-api)","exception":""}
+{"timestamp":"2025-07-30 08:47:11.608","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"No active profile set, falling back to 1 default profile: "default"","exception":""}
+{"timestamp":"2025-07-30 08:47:11.696","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable","exception":""}
+{"timestamp":"2025-07-30 08:47:11.697","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'","exception":""}
+{"timestamp":"2025-07-30 08:47:14.496","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Multiple Spring Data modules found, entering strict repository configuration mode","exception":""}
+{"timestamp":"2025-07-30 08:47:14.499","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Bootstrapping Spring Data JPA repositories in DEFAULT mode.","exception":""}
+{"timestamp":"2025-07-30 08:47:14.603","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Finished Spring Data repository scanning in 91 ms. Found 7 JPA repository interfaces.","exception":""}
+{"timestamp":"2025-07-30 08:47:14.944","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.cloud.context.scope.GenericScope","message":"BeanFactory id=071b8050-7555-34c2-8aab-ec114a906539","exception":""}
+{"timestamp":"2025-07-30 08:47:15.810","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.e.tomcat.TomcatWebServer","message":"Tomcat initialized with port 8080 (http)","exception":""}
+{"timestamp":"2025-07-30 08:47:15.829","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Initializing ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 08:47:15.831","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardService","message":"Starting service [Tomcat]","exception":""}
+{"timestamp":"2025-07-30 08:47:15.831","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardEngine","message":"Starting Servlet engine: [Apache Tomcat/10.1.42]","exception":""}
+{"timestamp":"2025-07-30 08:47:15.933","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.c.c.C.[Tomcat].[localhost].[/]","message":"Initializing Spring embedded WebApplicationContext","exception":""}
+{"timestamp":"2025-07-30 08:47:15.933","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.s.c.ServletWebServerApplicationContext","message":"Root WebApplicationContext: initialization completed in 4235 ms","exception":""}
+{"timestamp":"2025-07-30 08:47:16.999","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.p.SpringPersistenceUnitInfo","message":"No LoadTimeWeaver setup: ignoring JPA class transformer","exception":""}
+{"timestamp":"2025-07-30 08:47:17.048","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Starting...","exception":""}
+{"timestamp":"2025-07-30 08:47:17.314","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.pool.HikariPool","message":"HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:deliverydb user=SA","exception":""}
+{"timestamp":"2025-07-30 08:47:17.316","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Start completed.","exception":""}
+{"timestamp":"2025-07-30 08:47:17.357","level":"WARN","thread":"restartedMain","correlationId":"","logger":"org.hibernate.orm.deprecation","message":"HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)","exception":""}
+{"timestamp":"2025-07-30 08:47:18.800","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 08:47:18.805","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 08:47:18.806","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 08:47:18.806","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 08:47:18.806","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 08:47:18.806","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 08:47:18.807","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 08:47:18.814","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table cliente (
+        ativo boolean not null,
+        data_cadastro timestamp(6),
+        id bigint generated by default as identity,
+        usuario_id bigint not null unique,
+        cpf varchar(255),
+        email varchar(255),
+        endereco varchar(255),
+        nome varchar(255),
+        telefone varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:47:18.827","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table itens_pedido (
+        preco_unitario numeric(38,2),
+        quantidade integer not null,
+        subtotal numeric(38,2),
+        id bigint generated by default as identity,
+        pedido_id bigint,
+        produto_id bigint,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:47:18.829","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table pedidos (
+        data_pedido date,
+        subtotal numeric(38,2),
+        taxa_entrega numeric(10,2),
+        valor_total numeric(38,2),
+        cliente_id bigint,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        cep_entrega varchar(255) not null,
+        endereco_entrega varchar(255) not null,
+        numero_pedido varchar(255),
+        observacoes varchar(255),
+        forma_pagamento enum ('CARTAO_CREDITO','CARTAO_DEBITO','DINHEIRO','PIX','VALE_REFEICAO') not null,
+        status enum ('CANCELADO','CONFIRMADO','ENTREGUE','PENDENTE','PREPARANDO','PRONTO','SAIU_PARA_ENTREGA'),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:47:18.831","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table produto (
+        disponivel boolean not null,
+        estoque integer not null,
+        preco numeric(38,2),
+        id bigint generated by default as identity,
+        restaurante_id bigint not null,
+        categoria varchar(255),
+        descricao varchar(255),
+        nome varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:47:18.833","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table project (
+        id bigint generated by default as identity,
+        observations varchar(255),
+        project_title varchar(255),
+        repository_url varchar(255),
+        student_name varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:47:18.834","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table restaurante (
+        ativo boolean not null,
+        avaliacao numeric(3,2),
+        taxa_entrega numeric(10,2) not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        nome varchar(100) not null,
+        categoria varchar(255) not null,
+        endereco varchar(255) not null,
+        telefone varchar(255) not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:47:18.837","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table usuario (
+        ativo boolean not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        email varchar(255) not null unique,
+        nome varchar(255) not null,
+        senha varchar(255) not null,
+        role enum ('ADMIN','CLIENTE','ENTREGADOR','RESTAURANTE') not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:47:18.839","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists cliente 
+       add constraint FKc3u631ocxdrtm3ccpme0kjlmu 
+       foreign key (usuario_id) 
+       references usuario","exception":""}
+{"timestamp":"2025-07-30 08:47:18.854","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK42mycompce3b7yt3l6ukdwsxy 
+       foreign key (pedido_id) 
+       references pedidos","exception":""}
+{"timestamp":"2025-07-30 08:47:18.857","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK3uo2duj20r2i4mwplv4vb26u6 
+       foreign key (produto_id) 
+       references produto","exception":""}
+{"timestamp":"2025-07-30 08:47:18.858","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK6wgk5emlhdcthucnnmi4dpl33 
+       foreign key (cliente_id) 
+       references cliente","exception":""}
+{"timestamp":"2025-07-30 08:47:18.862","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK5ti4tnra3ey4hpd7ko661ndg0 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 08:47:18.866","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists produto 
+       add constraint FKb9jhjyghjcn25guim7q4pt8qx 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 08:47:18.872","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Initialized JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 08:47:19.441","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.j.r.query.QueryEnhancerFactory","message":"Hibernate is in classpath; If applicable, HQL parser will be used.","exception":""}
+{"timestamp":"2025-07-30 08:47:20.671","level":"WARN","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer","message":"Found 2 UserDetailsService beans, with names [authService, usuarioService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.","exception":""}
+{"timestamp":"2025-07-30 08:47:20.671","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.AuthenticationConfiguration$DefaultPasswordEncoderAuthenticationManagerBuilder","message":"No authenticationProviders and no parentAuthenticationManager defined. Returning null.","exception":""}
+{"timestamp":"2025-07-30 08:47:21.279","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.e.web.EndpointLinksResolver","message":"Exposing 17 endpoints beneath base path '/actuator'","exception":""}
+{"timestamp":"2025-07-30 08:47:21.383","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.web.DefaultSecurityFilterChain","message":"Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, AuthorizationFilter","exception":""}
+{"timestamp":"2025-07-30 08:47:21.875","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.h.H2ConsoleAutoConfiguration","message":"H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:deliverydb'","exception":""}
+{"timestamp":"2025-07-30 08:47:21.994","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.a.OptionalLiveReloadServer","message":"LiveReload server is running on port 35729","exception":""}
+{"timestamp":"2025-07-30 08:47:22.125","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Starting ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 08:47:22.155","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.e.tomcat.TomcatWebServer","message":"Tomcat started on port 8080 (http) with context path '/'","exception":""}
+{"timestamp":"2025-07-30 08:47:22.176","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"Started DeliveryApiApplication in 11.24 seconds (process running for 12.423)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.303","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.cep_entrega,
+        p1_0.cliente_id,
+        p1_0.data_pedido,
+        p1_0.endereco_entrega,
+        p1_0.forma_pagamento,
+        p1_0.numero_pedido,
+        p1_0.observacoes,
+        p1_0.restaurante_id,
+        p1_0.status,
+        p1_0.subtotal,
+        p1_0.taxa_entrega,
+        p1_0.valor_total 
+    from
+        pedidos p1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.333","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.categoria,
+        p1_0.descricao,
+        p1_0.disponivel,
+        p1_0.estoque,
+        p1_0.nome,
+        p1_0.preco,
+        p1_0.restaurante_id 
+    from
+        produto p1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.336","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.339","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.343","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.408","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.544","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.582","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.692","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.696","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.802","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.804","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.904","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.912","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.914","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.916","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.935","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Restaurante */insert 
+    into
+        restaurante (ativo, avaliacao, categoria, data_criacao, endereco, nome, taxa_entrega, telefone, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.937","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Restaurante */insert 
+    into
+        restaurante (ativo, avaliacao, categoria, data_criacao, endereco, nome, taxa_entrega, telefone, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.943","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.956","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.958","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.959","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.960","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.961","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.965","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.971","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.973","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.974","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.977","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.981","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.categoria,
+        p1_0.descricao,
+        p1_0.disponivel,
+        p1_0.estoque,
+        p1_0.nome,
+        p1_0.preco,
+        p1_0.restaurante_id 
+    from
+        produto p1_0","exception":""}
+{"timestamp":"2025-07-30 08:47:22.982","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0 
+    where
+        r1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.983","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0 
+    where
+        r1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:22.987","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Pedido */insert 
+    into
+        pedidos (cep_entrega, cliente_id, data_pedido, endereco_entrega, forma_pagamento, numero_pedido, observacoes, restaurante_id, status, subtotal, taxa_entrega, valor_total, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.991","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.993","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Pedido */insert 
+    into
+        pedidos (cep_entrega, cliente_id, data_pedido, endereco_entrega, forma_pagamento, numero_pedido, observacoes, restaurante_id, status, subtotal, taxa_entrega, valor_total, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.994","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:22.996","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:47:23.007","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        c1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:47:23.008","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:23.013","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        c1_0.ativo","exception":""}
+{"timestamp":"2025-07-30 08:47:23.014","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:23.015","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:23.026","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        upper(c1_0.nome) like upper(?) escape '\'","exception":""}
+{"timestamp":"2025-07-30 08:47:23.030","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:47:23.037","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id 
+    from
+        cliente c1_0 
+    where
+        c1_0.email=? 
+    fetch
+        first ? rows only","exception":""}
+{"timestamp":"2025-07-30 08:47:23.608","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.a.c.c.C.[Tomcat].[localhost].[/]","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'","exception":""}
+{"timestamp":"2025-07-30 08:47:23.608","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.s.web.servlet.DispatcherServlet","message":"Initializing Servlet 'dispatcherServlet'","exception":""}
+{"timestamp":"2025-07-30 08:47:23.609","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.s.web.servlet.DispatcherServlet","message":"Completed initialization in 1 ms","exception":""}
+{"timestamp":"2025-07-30 08:47:28.706","level":"DEBUG","thread":"http-nio-8080-exec-1","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /swagger-ui/index.html","exception":""}
+{"timestamp":"2025-07-30 08:47:28.732","level":"DEBUG","thread":"http-nio-8080-exec-1","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /swagger-ui/index.html","exception":""}
+{"timestamp":"2025-07-30 08:47:28.784","level":"DEBUG","thread":"http-nio-8080-exec-1","correlationId":"c7ce79b5ce604eae","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:28.804","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /swagger-ui/swagger-ui-bundle.js","exception":""}
+{"timestamp":"2025-07-30 08:47:28.805","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /swagger-ui/index.css","exception":""}
+{"timestamp":"2025-07-30 08:47:28.806","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /swagger-ui/index.css","exception":""}
+{"timestamp":"2025-07-30 08:47:28.806","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /swagger-ui/swagger-ui.css","exception":""}
+{"timestamp":"2025-07-30 08:47:28.807","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /swagger-ui/swagger-ui-bundle.js","exception":""}
+{"timestamp":"2025-07-30 08:47:28.831","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /swagger-ui/swagger-ui.css","exception":""}
+{"timestamp":"2025-07-30 08:47:28.845","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"8049f6523edf4f2d","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:28.856","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"be6663eaaf90419d","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:28.881","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /swagger-ui/swagger-initializer.js","exception":""}
+{"timestamp":"2025-07-30 08:47:28.883","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /swagger-ui/swagger-ui-standalone-preset.js","exception":""}
+{"timestamp":"2025-07-30 08:47:28.883","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /swagger-ui/swagger-initializer.js","exception":""}
+{"timestamp":"2025-07-30 08:47:28.909","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /swagger-ui/swagger-ui-standalone-preset.js","exception":""}
+{"timestamp":"2025-07-30 08:47:28.924","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"67319d281cad4178","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:28.967","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"7b594ae6a6f04c19","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:28.997","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"de7b467e54bc42ed","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:29.252","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /v3/api-docs/swagger-config","exception":""}
+{"timestamp":"2025-07-30 08:47:29.254","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /v3/api-docs/swagger-config","exception":""}
+{"timestamp":"2025-07-30 08:47:29.281","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"969dbedf66f64c20","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:29.310","level":"DEBUG","thread":"http-nio-8080-exec-8","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /v3/api-docs","exception":""}
+{"timestamp":"2025-07-30 08:47:29.312","level":"DEBUG","thread":"http-nio-8080-exec-8","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /v3/api-docs","exception":""}
+{"timestamp":"2025-07-30 08:47:30.259","level":"INFO","thread":"http-nio-8080-exec-8","correlationId":"0052f2576f8548ff","logger":"o.s.api.AbstractOpenApiResource","message":"Init duration for springdoc-openapi is: 928 ms","exception":""}
+{"timestamp":"2025-07-30 08:47:30.306","level":"DEBUG","thread":"http-nio-8080-exec-8","correlationId":"0052f2576f8548ff","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:47:55.292","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing POST /api/auth/login","exception":""}
+{"timestamp":"2025-07-30 08:47:55.294","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured POST /api/auth/login","exception":""}
+{"timestamp":"2025-07-30 08:47:55.349","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"7faded87e734481c","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:47:55.549","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"7faded87e734481c","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:50:37.476","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:50:37.481","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:50:37.498","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"75a3825420574e6f","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:50:37.583","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /favicon.ico","exception":""}
+{"timestamp":"2025-07-30 08:50:37.585","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:50:37.592","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:50:37.608","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 08:50:37.610","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:50:37.612","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 08:50:37.612","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:52:00.004","level":"INFO","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin","message":"Application shutdown requested.","exception":""}
+{"timestamp":"2025-07-30 08:52:00.009","level":"INFO","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Stopping ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 08:52:00.033","level":"INFO","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Closing JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 08:52:00.035","level":"DEBUG","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:00.038","level":"DEBUG","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:00.038","level":"DEBUG","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:00.039","level":"DEBUG","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:00.039","level":"DEBUG","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:00.039","level":"DEBUG","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:00.039","level":"DEBUG","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:00.045","level":"WARN","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"o.s.b.f.s.DisposableBeanAdapter","message":"Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]","exception":""}
+{"timestamp":"2025-07-30 08:52:00.046","level":"INFO","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown initiated...","exception":""}
+{"timestamp":"2025-07-30 08:52:00.048","level":"INFO","thread":"RMI TCP Connection(10)-127.0.0.1","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown completed.","exception":""}
+{"timestamp":"2025-07-30 08:52:37.053","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"Starting DeliveryApiApplication using Java 21.0.7 with PID 8820 (C:\FAT_Java_2025\workspace - local\delivery-api\target\classes started by rebre in C:\FAT_Java_2025\workspace - local\delivery-api)","exception":""}
+{"timestamp":"2025-07-30 08:52:37.055","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"No active profile set, falling back to 1 default profile: "default"","exception":""}
+{"timestamp":"2025-07-30 08:52:37.116","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable","exception":""}
+{"timestamp":"2025-07-30 08:52:37.116","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'","exception":""}
+{"timestamp":"2025-07-30 08:52:38.935","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Multiple Spring Data modules found, entering strict repository configuration mode","exception":""}
+{"timestamp":"2025-07-30 08:52:38.937","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Bootstrapping Spring Data JPA repositories in DEFAULT mode.","exception":""}
+{"timestamp":"2025-07-30 08:52:39.056","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Finished Spring Data repository scanning in 107 ms. Found 7 JPA repository interfaces.","exception":""}
+{"timestamp":"2025-07-30 08:52:39.350","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.cloud.context.scope.GenericScope","message":"BeanFactory id=5ad59847-150e-3d95-9319-9622d6ce9628","exception":""}
+{"timestamp":"2025-07-30 08:52:40.150","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.e.tomcat.TomcatWebServer","message":"Tomcat initialized with port 8080 (http)","exception":""}
+{"timestamp":"2025-07-30 08:52:40.169","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Initializing ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 08:52:40.173","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardService","message":"Starting service [Tomcat]","exception":""}
+{"timestamp":"2025-07-30 08:52:40.173","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardEngine","message":"Starting Servlet engine: [Apache Tomcat/10.1.42]","exception":""}
+{"timestamp":"2025-07-30 08:52:40.253","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.c.c.C.[Tomcat].[localhost].[/]","message":"Initializing Spring embedded WebApplicationContext","exception":""}
+{"timestamp":"2025-07-30 08:52:40.254","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.s.c.ServletWebServerApplicationContext","message":"Root WebApplicationContext: initialization completed in 3137 ms","exception":""}
+{"timestamp":"2025-07-30 08:52:41.085","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.p.SpringPersistenceUnitInfo","message":"No LoadTimeWeaver setup: ignoring JPA class transformer","exception":""}
+{"timestamp":"2025-07-30 08:52:41.126","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Starting...","exception":""}
+{"timestamp":"2025-07-30 08:52:41.329","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.pool.HikariPool","message":"HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:deliverydb user=SA","exception":""}
+{"timestamp":"2025-07-30 08:52:41.331","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Start completed.","exception":""}
+{"timestamp":"2025-07-30 08:52:41.366","level":"WARN","thread":"restartedMain","correlationId":"","logger":"org.hibernate.orm.deprecation","message":"HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)","exception":""}
+{"timestamp":"2025-07-30 08:52:42.644","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:42.651","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:42.651","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:42.652","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:42.652","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:42.652","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:42.653","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 08:52:42.660","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table cliente (
+        ativo boolean not null,
+        data_cadastro timestamp(6),
+        id bigint generated by default as identity,
+        usuario_id bigint not null unique,
+        cpf varchar(255),
+        email varchar(255),
+        endereco varchar(255),
+        nome varchar(255),
+        telefone varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:52:42.673","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table itens_pedido (
+        preco_unitario numeric(38,2),
+        quantidade integer not null,
+        subtotal numeric(38,2),
+        id bigint generated by default as identity,
+        pedido_id bigint,
+        produto_id bigint,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:52:42.676","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table pedidos (
+        data_pedido date,
+        subtotal numeric(38,2),
+        taxa_entrega numeric(10,2),
+        valor_total numeric(38,2),
+        cliente_id bigint,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        cep_entrega varchar(255) not null,
+        endereco_entrega varchar(255) not null,
+        numero_pedido varchar(255),
+        observacoes varchar(255),
+        forma_pagamento enum ('CARTAO_CREDITO','CARTAO_DEBITO','DINHEIRO','PIX','VALE_REFEICAO') not null,
+        status enum ('CANCELADO','CONFIRMADO','ENTREGUE','PENDENTE','PREPARANDO','PRONTO','SAIU_PARA_ENTREGA'),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:52:42.679","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table produto (
+        disponivel boolean not null,
+        estoque integer not null,
+        preco numeric(38,2),
+        id bigint generated by default as identity,
+        restaurante_id bigint not null,
+        categoria varchar(255),
+        descricao varchar(255),
+        nome varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:52:42.681","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table project (
+        id bigint generated by default as identity,
+        observations varchar(255),
+        project_title varchar(255),
+        repository_url varchar(255),
+        student_name varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:52:42.683","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table restaurante (
+        ativo boolean not null,
+        avaliacao numeric(3,2),
+        taxa_entrega numeric(10,2) not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        nome varchar(100) not null,
+        categoria varchar(255) not null,
+        endereco varchar(255) not null,
+        telefone varchar(255) not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:52:42.685","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table usuario (
+        ativo boolean not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        email varchar(255) not null unique,
+        nome varchar(255) not null,
+        senha varchar(255) not null,
+        role enum ('ADMIN','CLIENTE','ENTREGADOR','RESTAURANTE') not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 08:52:42.688","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists cliente 
+       add constraint FKc3u631ocxdrtm3ccpme0kjlmu 
+       foreign key (usuario_id) 
+       references usuario","exception":""}
+{"timestamp":"2025-07-30 08:52:42.703","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK42mycompce3b7yt3l6ukdwsxy 
+       foreign key (pedido_id) 
+       references pedidos","exception":""}
+{"timestamp":"2025-07-30 08:52:42.706","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK3uo2duj20r2i4mwplv4vb26u6 
+       foreign key (produto_id) 
+       references produto","exception":""}
+{"timestamp":"2025-07-30 08:52:42.707","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK6wgk5emlhdcthucnnmi4dpl33 
+       foreign key (cliente_id) 
+       references cliente","exception":""}
+{"timestamp":"2025-07-30 08:52:42.709","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK5ti4tnra3ey4hpd7ko661ndg0 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 08:52:42.712","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists produto 
+       add constraint FKb9jhjyghjcn25guim7q4pt8qx 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 08:52:42.719","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Initialized JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 08:52:43.195","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.j.r.query.QueryEnhancerFactory","message":"Hibernate is in classpath; If applicable, HQL parser will be used.","exception":""}
+{"timestamp":"2025-07-30 08:52:44.358","level":"WARN","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer","message":"Found 2 UserDetailsService beans, with names [authService, usuarioService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.","exception":""}
+{"timestamp":"2025-07-30 08:52:44.359","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.AuthenticationConfiguration$DefaultPasswordEncoderAuthenticationManagerBuilder","message":"No authenticationProviders and no parentAuthenticationManager defined. Returning null.","exception":""}
+{"timestamp":"2025-07-30 08:52:44.923","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.e.web.EndpointLinksResolver","message":"Exposing 1 endpoint beneath base path '/actuator'","exception":""}
+{"timestamp":"2025-07-30 08:52:45.016","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.web.DefaultSecurityFilterChain","message":"Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, AuthorizationFilter","exception":""}
+{"timestamp":"2025-07-30 08:52:45.479","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.h.H2ConsoleAutoConfiguration","message":"H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:deliverydb'","exception":""}
+{"timestamp":"2025-07-30 08:52:45.604","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.a.OptionalLiveReloadServer","message":"LiveReload server is running on port 35729","exception":""}
+{"timestamp":"2025-07-30 08:52:45.725","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Starting ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 08:52:45.747","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.e.tomcat.TomcatWebServer","message":"Tomcat started on port 8080 (http) with context path '/'","exception":""}
+{"timestamp":"2025-07-30 08:52:45.768","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"Started DeliveryApiApplication in 9.335 seconds (process running for 10.299)","exception":""}
+{"timestamp":"2025-07-30 08:52:45.863","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.cep_entrega,
+        p1_0.cliente_id,
+        p1_0.data_pedido,
+        p1_0.endereco_entrega,
+        p1_0.forma_pagamento,
+        p1_0.numero_pedido,
+        p1_0.observacoes,
+        p1_0.restaurante_id,
+        p1_0.status,
+        p1_0.subtotal,
+        p1_0.taxa_entrega,
+        p1_0.valor_total 
+    from
+        pedidos p1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:45.889","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.categoria,
+        p1_0.descricao,
+        p1_0.disponivel,
+        p1_0.estoque,
+        p1_0.nome,
+        p1_0.preco,
+        p1_0.restaurante_id 
+    from
+        produto p1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:45.892","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:45.896","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:45.899","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:45.952","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.078","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.107","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.212","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.217","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.316","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.321","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.416","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.422","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.425","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.426","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.442","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Restaurante */insert 
+    into
+        restaurante (ativo, avaliacao, categoria, data_criacao, endereco, nome, taxa_entrega, telefone, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.444","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Restaurante */insert 
+    into
+        restaurante (ativo, avaliacao, categoria, data_criacao, endereco, nome, taxa_entrega, telefone, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.448","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:46.461","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.463","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.465","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.465","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.466","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.469","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:46.474","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.477","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.480","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.485","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:46.489","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.categoria,
+        p1_0.descricao,
+        p1_0.disponivel,
+        p1_0.estoque,
+        p1_0.nome,
+        p1_0.preco,
+        p1_0.restaurante_id 
+    from
+        produto p1_0","exception":""}
+{"timestamp":"2025-07-30 08:52:46.490","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0 
+    where
+        r1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.491","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0 
+    where
+        r1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.496","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Pedido */insert 
+    into
+        pedidos (cep_entrega, cliente_id, data_pedido, endereco_entrega, forma_pagamento, numero_pedido, observacoes, restaurante_id, status, subtotal, taxa_entrega, valor_total, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.500","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.502","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Pedido */insert 
+    into
+        pedidos (cep_entrega, cliente_id, data_pedido, endereco_entrega, forma_pagamento, numero_pedido, observacoes, restaurante_id, status, subtotal, taxa_entrega, valor_total, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.503","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.504","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 08:52:46.517","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        c1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.519","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.525","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        c1_0.ativo","exception":""}
+{"timestamp":"2025-07-30 08:52:46.526","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.527","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.537","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        upper(c1_0.nome) like upper(?) escape '\'","exception":""}
+{"timestamp":"2025-07-30 08:52:46.540","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 08:52:46.546","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id 
+    from
+        cliente c1_0 
+    where
+        c1_0.email=? 
+    fetch
+        first ? rows only","exception":""}
+{"timestamp":"2025-07-30 08:52:47.089","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.a.c.c.C.[Tomcat].[localhost].[/]","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'","exception":""}
+{"timestamp":"2025-07-30 08:52:47.090","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.s.web.servlet.DispatcherServlet","message":"Initializing Servlet 'dispatcherServlet'","exception":""}
+{"timestamp":"2025-07-30 08:52:47.091","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.s.web.servlet.DispatcherServlet","message":"Completed initialization in 1 ms","exception":""}
+{"timestamp":"2025-07-30 08:52:49.914","level":"DEBUG","thread":"http-nio-8080-exec-1","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:52:49.943","level":"DEBUG","thread":"http-nio-8080-exec-1","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:52:50.003","level":"DEBUG","thread":"http-nio-8080-exec-1","correlationId":"3972f58520374501","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:52:50.089","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /favicon.ico","exception":""}
+{"timestamp":"2025-07-30 08:52:50.095","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:52:50.102","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:52:50.116","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 08:52:50.119","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:52:50.129","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 08:52:50.130","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:53:00.943","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:53:00.946","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:53:00.948","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"5418279a083e4a72","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:01.000","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /favicon.ico","exception":""}
+{"timestamp":"2025-07-30 08:53:01.002","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:01.002","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:53:01.005","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 08:53:01.007","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:01.010","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 08:53:01.010","level":"DEBUG","thread":"http-nio-8080-exec-4","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:53:14.198","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing POST /api/auth/login","exception":""}
+{"timestamp":"2025-07-30 08:53:14.200","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured POST /api/auth/login","exception":""}
+{"timestamp":"2025-07-30 08:53:14.306","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"7afce157ee43401a","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 08:53:14.511","level":"DEBUG","thread":"http-nio-8080-exec-5","correlationId":"7afce157ee43401a","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:31.259","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:53:31.261","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:53:31.264","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"2c26cc17995a4292","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:31.307","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /favicon.ico","exception":""}
+{"timestamp":"2025-07-30 08:53:31.308","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:31.309","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:53:31.313","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 08:53:31.314","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:31.316","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 08:53:31.316","level":"DEBUG","thread":"http-nio-8080-exec-7","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:53:38.796","level":"DEBUG","thread":"http-nio-8080-exec-8","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:53:38.798","level":"DEBUG","thread":"http-nio-8080-exec-8","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /actuator/info","exception":""}
+{"timestamp":"2025-07-30 08:53:38.801","level":"DEBUG","thread":"http-nio-8080-exec-8","correlationId":"939ba02a571249c2","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:38.847","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /favicon.ico","exception":""}
+{"timestamp":"2025-07-30 08:53:38.848","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:38.849","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:53:38.851","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 08:53:38.853","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:53:38.854","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 08:53:38.854","level":"DEBUG","thread":"http-nio-8080-exec-9","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:54:41.918","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /actuator/env","exception":""}
+{"timestamp":"2025-07-30 08:54:41.919","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /actuator/env","exception":""}
+{"timestamp":"2025-07-30 08:54:41.928","level":"ERROR","thread":"http-nio-8080-exec-2","correlationId":"c9338073515d48fd","logger":"c.d.d.e.GlobalExceptionHandler","message":"Erro inesperado no sistema: ","exception":"org.springframework.web.servlet.resource.NoResourceFoundException: No static resource actuator/env.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:586)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at com.deliverytech.delivery.filter.CorrelationIdFilter.doFilter(CorrelationIdFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+"}
+{"timestamp":"2025-07-30 08:54:41.942","level":"WARN","thread":"http-nio-8080-exec-2","correlationId":"c9338073515d48fd","logger":"o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver","message":"Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource actuator/env.]","exception":""}
+{"timestamp":"2025-07-30 08:54:41.942","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"c9338073515d48fd","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:54:41.996","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /favicon.ico","exception":""}
+{"timestamp":"2025-07-30 08:54:41.997","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:54:42.001","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:54:42.005","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 08:54:42.006","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 08:54:42.007","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 08:54:42.007","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 08:55:54.899","level":"INFO","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin","message":"Application shutdown requested.","exception":""}
+{"timestamp":"2025-07-30 08:55:54.902","level":"INFO","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Stopping ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 08:55:54.923","level":"INFO","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Closing JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 08:55:54.924","level":"DEBUG","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 08:55:54.927","level":"DEBUG","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 08:55:54.927","level":"DEBUG","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 08:55:54.928","level":"DEBUG","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 08:55:54.929","level":"DEBUG","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 08:55:54.929","level":"DEBUG","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 08:55:54.929","level":"DEBUG","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 08:55:54.935","level":"WARN","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"o.s.b.f.s.DisposableBeanAdapter","message":"Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]","exception":""}
+{"timestamp":"2025-07-30 08:55:54.936","level":"INFO","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown initiated...","exception":""}
+{"timestamp":"2025-07-30 08:55:54.939","level":"INFO","thread":"RMI TCP Connection(8)-127.0.0.1","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown completed.","exception":""}
+{"timestamp":"2025-07-30 09:22:47.440","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"Starting DeliveryApiApplication using Java 21.0.7 with PID 13372 (C:\FAT_Java_2025\workspace - local\delivery-api\target\classes started by rebre in C:\FAT_Java_2025\workspace - local\delivery-api)","exception":""}
+{"timestamp":"2025-07-30 09:22:47.443","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"No active profile set, falling back to 1 default profile: "default"","exception":""}
+{"timestamp":"2025-07-30 09:22:47.513","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable","exception":""}
+{"timestamp":"2025-07-30 09:22:47.513","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'","exception":""}
+{"timestamp":"2025-07-30 09:22:49.404","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Multiple Spring Data modules found, entering strict repository configuration mode","exception":""}
+{"timestamp":"2025-07-30 09:22:49.406","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Bootstrapping Spring Data JPA repositories in DEFAULT mode.","exception":""}
+{"timestamp":"2025-07-30 09:22:49.511","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Finished Spring Data repository scanning in 91 ms. Found 7 JPA repository interfaces.","exception":""}
+{"timestamp":"2025-07-30 09:22:49.791","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.cloud.context.scope.GenericScope","message":"BeanFactory id=071b8050-7555-34c2-8aab-ec114a906539","exception":""}
+{"timestamp":"2025-07-30 09:22:50.630","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.e.tomcat.TomcatWebServer","message":"Tomcat initialized with port 8080 (http)","exception":""}
+{"timestamp":"2025-07-30 09:22:50.649","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Initializing ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 09:22:50.651","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardService","message":"Starting service [Tomcat]","exception":""}
+{"timestamp":"2025-07-30 09:22:50.652","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardEngine","message":"Starting Servlet engine: [Apache Tomcat/10.1.42]","exception":""}
+{"timestamp":"2025-07-30 09:22:50.760","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.c.c.C.[Tomcat].[localhost].[/]","message":"Initializing Spring embedded WebApplicationContext","exception":""}
+{"timestamp":"2025-07-30 09:22:50.761","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.s.c.ServletWebServerApplicationContext","message":"Root WebApplicationContext: initialization completed in 3247 ms","exception":""}
+{"timestamp":"2025-07-30 09:22:51.944","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.p.SpringPersistenceUnitInfo","message":"No LoadTimeWeaver setup: ignoring JPA class transformer","exception":""}
+{"timestamp":"2025-07-30 09:22:51.992","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Starting...","exception":""}
+{"timestamp":"2025-07-30 09:22:52.286","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.pool.HikariPool","message":"HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:deliverydb user=SA","exception":""}
+{"timestamp":"2025-07-30 09:22:52.290","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Start completed.","exception":""}
+{"timestamp":"2025-07-30 09:22:52.352","level":"WARN","thread":"restartedMain","correlationId":"","logger":"org.hibernate.orm.deprecation","message":"HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)","exception":""}
+{"timestamp":"2025-07-30 09:22:53.971","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:53.978","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:53.979","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:53.979","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:53.980","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:53.980","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:53.980","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:53.990","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table cliente (
+        ativo boolean not null,
+        data_cadastro timestamp(6),
+        id bigint generated by default as identity,
+        usuario_id bigint not null unique,
+        cpf varchar(255),
+        email varchar(255),
+        endereco varchar(255),
+        nome varchar(255),
+        telefone varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:22:54.006","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table itens_pedido (
+        preco_unitario numeric(38,2),
+        quantidade integer not null,
+        subtotal numeric(38,2),
+        id bigint generated by default as identity,
+        pedido_id bigint,
+        produto_id bigint,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:22:54.010","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table pedidos (
+        data_pedido date,
+        subtotal numeric(38,2),
+        taxa_entrega numeric(10,2),
+        valor_total numeric(38,2),
+        cliente_id bigint,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        cep_entrega varchar(255) not null,
+        endereco_entrega varchar(255) not null,
+        numero_pedido varchar(255),
+        observacoes varchar(255),
+        forma_pagamento enum ('CARTAO_CREDITO','CARTAO_DEBITO','DINHEIRO','PIX','VALE_REFEICAO') not null,
+        status enum ('CANCELADO','CONFIRMADO','ENTREGUE','PENDENTE','PREPARANDO','PRONTO','SAIU_PARA_ENTREGA'),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:22:54.013","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table produto (
+        disponivel boolean not null,
+        estoque integer not null,
+        preco numeric(38,2),
+        id bigint generated by default as identity,
+        restaurante_id bigint not null,
+        categoria varchar(255),
+        descricao varchar(255),
+        nome varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:22:54.016","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table project (
+        id bigint generated by default as identity,
+        observations varchar(255),
+        project_title varchar(255),
+        repository_url varchar(255),
+        student_name varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:22:54.017","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table restaurante (
+        ativo boolean not null,
+        avaliacao numeric(3,2),
+        taxa_entrega numeric(10,2) not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        nome varchar(100) not null,
+        categoria varchar(255) not null,
+        endereco varchar(255) not null,
+        telefone varchar(255) not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:22:54.020","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table usuario (
+        ativo boolean not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        email varchar(255) not null unique,
+        nome varchar(255) not null,
+        senha varchar(255) not null,
+        role enum ('ADMIN','CLIENTE','ENTREGADOR','RESTAURANTE') not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:22:54.023","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists cliente 
+       add constraint FKc3u631ocxdrtm3ccpme0kjlmu 
+       foreign key (usuario_id) 
+       references usuario","exception":""}
+{"timestamp":"2025-07-30 09:22:54.042","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK42mycompce3b7yt3l6ukdwsxy 
+       foreign key (pedido_id) 
+       references pedidos","exception":""}
+{"timestamp":"2025-07-30 09:22:54.044","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK3uo2duj20r2i4mwplv4vb26u6 
+       foreign key (produto_id) 
+       references produto","exception":""}
+{"timestamp":"2025-07-30 09:22:54.047","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK6wgk5emlhdcthucnnmi4dpl33 
+       foreign key (cliente_id) 
+       references cliente","exception":""}
+{"timestamp":"2025-07-30 09:22:54.049","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK5ti4tnra3ey4hpd7ko661ndg0 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 09:22:54.051","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists produto 
+       add constraint FKb9jhjyghjcn25guim7q4pt8qx 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 09:22:54.060","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Initialized JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 09:22:54.582","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.j.r.query.QueryEnhancerFactory","message":"Hibernate is in classpath; If applicable, HQL parser will be used.","exception":""}
+{"timestamp":"2025-07-30 09:22:55.856","level":"WARN","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer","message":"Found 2 UserDetailsService beans, with names [authService, usuarioService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.","exception":""}
+{"timestamp":"2025-07-30 09:22:55.856","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.AuthenticationConfiguration$DefaultPasswordEncoderAuthenticationManagerBuilder","message":"No authenticationProviders and no parentAuthenticationManager defined. Returning null.","exception":""}
+{"timestamp":"2025-07-30 09:22:56.397","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.e.web.EndpointLinksResolver","message":"Exposing 17 endpoints beneath base path '/actuator'","exception":""}
+{"timestamp":"2025-07-30 09:22:56.482","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.web.DefaultSecurityFilterChain","message":"Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, AuthorizationFilter","exception":""}
+{"timestamp":"2025-07-30 09:22:56.959","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.h.H2ConsoleAutoConfiguration","message":"H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:deliverydb'","exception":""}
+{"timestamp":"2025-07-30 09:22:57.079","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.a.OptionalLiveReloadServer","message":"LiveReload server is running on port 35729","exception":""}
+{"timestamp":"2025-07-30 09:22:57.216","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Starting ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 09:22:57.225","level":"WARN","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext","message":"Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'","exception":""}
+{"timestamp":"2025-07-30 09:22:57.233","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Closing JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 09:22:57.235","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:57.238","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:57.240","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:57.241","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:57.243","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:57.244","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:57.244","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 09:22:57.252","level":"WARN","thread":"restartedMain","correlationId":"","logger":"o.s.b.f.s.DisposableBeanAdapter","message":"Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]","exception":""}
+{"timestamp":"2025-07-30 09:22:57.252","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown initiated...","exception":""}
+{"timestamp":"2025-07-30 09:22:57.255","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown completed.","exception":""}
+{"timestamp":"2025-07-30 09:22:57.283","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.l.ConditionEvaluationReportLogger","message":"
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.","exception":""}
+{"timestamp":"2025-07-30 09:22:57.312","level":"ERROR","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.LoggingFailureAnalysisReporter","message":"
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+","exception":""}
+{"timestamp":"2025-07-30 09:26:55.037","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"Starting DeliveryApiApplication using Java 21.0.7 with PID 15592 (C:\FAT_Java_2025\workspace - local\delivery-api\target\classes started by rebre in C:\FAT_Java_2025\workspace - local\delivery-api)","exception":""}
+{"timestamp":"2025-07-30 09:26:55.040","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"No active profile set, falling back to 1 default profile: "default"","exception":""}
+{"timestamp":"2025-07-30 09:26:55.094","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable","exception":""}
+{"timestamp":"2025-07-30 09:26:55.094","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor","message":"For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'","exception":""}
+{"timestamp":"2025-07-30 09:26:56.629","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Multiple Spring Data modules found, entering strict repository configuration mode","exception":""}
+{"timestamp":"2025-07-30 09:26:56.631","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Bootstrapping Spring Data JPA repositories in DEFAULT mode.","exception":""}
+{"timestamp":"2025-07-30 09:26:56.740","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.r.c.RepositoryConfigurationDelegate","message":"Finished Spring Data repository scanning in 100 ms. Found 7 JPA repository interfaces.","exception":""}
+{"timestamp":"2025-07-30 09:26:57.005","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.cloud.context.scope.GenericScope","message":"BeanFactory id=071b8050-7555-34c2-8aab-ec114a906539","exception":""}
+{"timestamp":"2025-07-30 09:26:57.680","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.e.tomcat.TomcatWebServer","message":"Tomcat initialized with port 8080 (http)","exception":""}
+{"timestamp":"2025-07-30 09:26:57.693","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Initializing ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 09:26:57.695","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardService","message":"Starting service [Tomcat]","exception":""}
+{"timestamp":"2025-07-30 09:26:57.695","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.catalina.core.StandardEngine","message":"Starting Servlet engine: [Apache Tomcat/10.1.42]","exception":""}
+{"timestamp":"2025-07-30 09:26:57.767","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.c.c.C.[Tomcat].[localhost].[/]","message":"Initializing Spring embedded WebApplicationContext","exception":""}
+{"timestamp":"2025-07-30 09:26:57.768","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.s.c.ServletWebServerApplicationContext","message":"Root WebApplicationContext: initialization completed in 2673 ms","exception":""}
+{"timestamp":"2025-07-30 09:26:58.639","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.p.SpringPersistenceUnitInfo","message":"No LoadTimeWeaver setup: ignoring JPA class transformer","exception":""}
+{"timestamp":"2025-07-30 09:26:58.678","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Starting...","exception":""}
+{"timestamp":"2025-07-30 09:26:58.878","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.pool.HikariPool","message":"HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:deliverydb user=SA","exception":""}
+{"timestamp":"2025-07-30 09:26:58.880","level":"INFO","thread":"restartedMain","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Start completed.","exception":""}
+{"timestamp":"2025-07-30 09:26:58.918","level":"WARN","thread":"restartedMain","correlationId":"","logger":"org.hibernate.orm.deprecation","message":"HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)","exception":""}
+{"timestamp":"2025-07-30 09:27:00.167","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 09:27:00.173","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 09:27:00.173","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 09:27:00.174","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 09:27:00.174","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 09:27:00.174","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 09:27:00.175","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 09:27:00.182","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table cliente (
+        ativo boolean not null,
+        data_cadastro timestamp(6),
+        id bigint generated by default as identity,
+        usuario_id bigint not null unique,
+        cpf varchar(255),
+        email varchar(255),
+        endereco varchar(255),
+        nome varchar(255),
+        telefone varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:27:00.194","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table itens_pedido (
+        preco_unitario numeric(38,2),
+        quantidade integer not null,
+        subtotal numeric(38,2),
+        id bigint generated by default as identity,
+        pedido_id bigint,
+        produto_id bigint,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:27:00.198","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table pedidos (
+        data_pedido date,
+        subtotal numeric(38,2),
+        taxa_entrega numeric(10,2),
+        valor_total numeric(38,2),
+        cliente_id bigint,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        cep_entrega varchar(255) not null,
+        endereco_entrega varchar(255) not null,
+        numero_pedido varchar(255),
+        observacoes varchar(255),
+        forma_pagamento enum ('CARTAO_CREDITO','CARTAO_DEBITO','DINHEIRO','PIX','VALE_REFEICAO') not null,
+        status enum ('CANCELADO','CONFIRMADO','ENTREGUE','PENDENTE','PREPARANDO','PRONTO','SAIU_PARA_ENTREGA'),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:27:00.201","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table produto (
+        disponivel boolean not null,
+        estoque integer not null,
+        preco numeric(38,2),
+        id bigint generated by default as identity,
+        restaurante_id bigint not null,
+        categoria varchar(255),
+        descricao varchar(255),
+        nome varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:27:00.202","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table project (
+        id bigint generated by default as identity,
+        observations varchar(255),
+        project_title varchar(255),
+        repository_url varchar(255),
+        student_name varchar(255),
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:27:00.204","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table restaurante (
+        ativo boolean not null,
+        avaliacao numeric(3,2),
+        taxa_entrega numeric(10,2) not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        nome varchar(100) not null,
+        categoria varchar(255) not null,
+        endereco varchar(255) not null,
+        telefone varchar(255) not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:27:00.205","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    create table usuario (
+        ativo boolean not null,
+        data_criacao timestamp(6) not null,
+        id bigint generated by default as identity,
+        restaurante_id bigint,
+        email varchar(255) not null unique,
+        nome varchar(255) not null,
+        senha varchar(255) not null,
+        role enum ('ADMIN','CLIENTE','ENTREGADOR','RESTAURANTE') not null,
+        primary key (id)
+    )","exception":""}
+{"timestamp":"2025-07-30 09:27:00.207","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists cliente 
+       add constraint FKc3u631ocxdrtm3ccpme0kjlmu 
+       foreign key (usuario_id) 
+       references usuario","exception":""}
+{"timestamp":"2025-07-30 09:27:00.220","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK42mycompce3b7yt3l6ukdwsxy 
+       foreign key (pedido_id) 
+       references pedidos","exception":""}
+{"timestamp":"2025-07-30 09:27:00.222","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists itens_pedido 
+       add constraint FK3uo2duj20r2i4mwplv4vb26u6 
+       foreign key (produto_id) 
+       references produto","exception":""}
+{"timestamp":"2025-07-30 09:27:00.223","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK6wgk5emlhdcthucnnmi4dpl33 
+       foreign key (cliente_id) 
+       references cliente","exception":""}
+{"timestamp":"2025-07-30 09:27:00.225","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists pedidos 
+       add constraint FK5ti4tnra3ey4hpd7ko661ndg0 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 09:27:00.225","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    alter table if exists produto 
+       add constraint FKb9jhjyghjcn25guim7q4pt8qx 
+       foreign key (restaurante_id) 
+       references restaurante","exception":""}
+{"timestamp":"2025-07-30 09:27:00.231","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Initialized JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 09:27:00.718","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.d.j.r.query.QueryEnhancerFactory","message":"Hibernate is in classpath; If applicable, HQL parser will be used.","exception":""}
+{"timestamp":"2025-07-30 09:27:01.889","level":"WARN","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer","message":"Found 2 UserDetailsService beans, with names [authService, usuarioService]. Global Authentication Manager will not use a UserDetailsService for username/password login. Consider publishing a single UserDetailsService bean.","exception":""}
+{"timestamp":"2025-07-30 09:27:01.889","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.c.a.a.c.AuthenticationConfiguration$DefaultPasswordEncoderAuthenticationManagerBuilder","message":"No authenticationProviders and no parentAuthenticationManager defined. Returning null.","exception":""}
+{"timestamp":"2025-07-30 09:27:02.426","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.e.web.EndpointLinksResolver","message":"Exposing 17 endpoints beneath base path '/actuator'","exception":""}
+{"timestamp":"2025-07-30 09:27:02.520","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"o.s.s.web.DefaultSecurityFilterChain","message":"Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, AuthorizationFilter","exception":""}
+{"timestamp":"2025-07-30 09:27:03.084","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.a.h.H2ConsoleAutoConfiguration","message":"H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:deliverydb'","exception":""}
+{"timestamp":"2025-07-30 09:27:03.238","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.d.a.OptionalLiveReloadServer","message":"LiveReload server is running on port 35729","exception":""}
+{"timestamp":"2025-07-30 09:27:03.416","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Starting ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 09:27:03.455","level":"INFO","thread":"restartedMain","correlationId":"","logger":"o.s.b.w.e.tomcat.TomcatWebServer","message":"Tomcat started on port 8080 (http) with context path '/'","exception":""}
+{"timestamp":"2025-07-30 09:27:03.482","level":"INFO","thread":"restartedMain","correlationId":"","logger":"c.d.delivery.DeliveryApiApplication","message":"Started DeliveryApiApplication in 9.073 seconds (process running for 10.078)","exception":""}
+{"timestamp":"2025-07-30 09:27:03.629","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.cep_entrega,
+        p1_0.cliente_id,
+        p1_0.data_pedido,
+        p1_0.endereco_entrega,
+        p1_0.forma_pagamento,
+        p1_0.numero_pedido,
+        p1_0.observacoes,
+        p1_0.restaurante_id,
+        p1_0.status,
+        p1_0.subtotal,
+        p1_0.taxa_entrega,
+        p1_0.valor_total 
+    from
+        pedidos p1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:03.677","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.categoria,
+        p1_0.descricao,
+        p1_0.disponivel,
+        p1_0.estoque,
+        p1_0.nome,
+        p1_0.preco,
+        p1_0.restaurante_id 
+    from
+        produto p1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:03.682","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:03.686","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:03.690","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:03.780","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 09:27:03.983","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.030","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.173","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.180","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.313","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.318","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.458","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Usuario */insert 
+    into
+        usuario (ativo, data_criacao, email, nome, restaurante_id, role, senha, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.471","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.474","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.476","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Cliente */insert 
+    into
+        cliente (ativo, cpf, data_cadastro, email, endereco, nome, telefone, usuario_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.501","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Restaurante */insert 
+    into
+        restaurante (ativo, avaliacao, categoria, data_criacao, endereco, nome, taxa_entrega, telefone, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.504","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Restaurante */insert 
+    into
+        restaurante (ativo, avaliacao, categoria, data_criacao, endereco, nome, taxa_entrega, telefone, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.511","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:04.531","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.532","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.534","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.536","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.538","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Produto */insert 
+    into
+        produto (categoria, descricao, disponivel, estoque, nome, preco, restaurante_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.544","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:04.552","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.555","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.556","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.560","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:04.565","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.categoria,
+        p1_0.descricao,
+        p1_0.disponivel,
+        p1_0.estoque,
+        p1_0.nome,
+        p1_0.preco,
+        p1_0.restaurante_id 
+    from
+        produto p1_0","exception":""}
+{"timestamp":"2025-07-30 09:27:04.566","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0 
+    where
+        r1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.569","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        r1_0.id,
+        r1_0.ativo,
+        r1_0.avaliacao,
+        r1_0.categoria,
+        r1_0.data_criacao,
+        r1_0.endereco,
+        r1_0.nome,
+        r1_0.taxa_entrega,
+        r1_0.telefone 
+    from
+        restaurante r1_0 
+    where
+        r1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.576","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Pedido */insert 
+    into
+        pedidos (cep_entrega, cliente_id, data_pedido, endereco_entrega, forma_pagamento, numero_pedido, observacoes, restaurante_id, status, subtotal, taxa_entrega, valor_total, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.581","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.584","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.Pedido */insert 
+    into
+        pedidos (cep_entrega, cliente_id, data_pedido, endereco_entrega, forma_pagamento, numero_pedido, observacoes, restaurante_id, status, subtotal, taxa_entrega, valor_total, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.587","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.588","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* insert for
+        com.deliverytech.delivery.entities.ItemPedido */insert 
+    into
+        itens_pedido (pedido_id, preco_unitario, produto_id, quantidade, subtotal, id) 
+    values
+        (?, ?, ?, ?, ?, default)","exception":""}
+{"timestamp":"2025-07-30 09:27:04.605","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        c1_0.email=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.607","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.614","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        c1_0.ativo","exception":""}
+{"timestamp":"2025-07-30 09:27:04.618","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.621","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.635","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.cpf,
+        c1_0.data_cadastro,
+        c1_0.email,
+        c1_0.endereco,
+        c1_0.nome,
+        c1_0.telefone,
+        c1_0.usuario_id 
+    from
+        cliente c1_0 
+    where
+        upper(c1_0.nome) like upper(?) escape '\'","exception":""}
+{"timestamp":"2025-07-30 09:27:04.640","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    select
+        u1_0.id,
+        u1_0.ativo,
+        u1_0.data_criacao,
+        u1_0.email,
+        u1_0.nome,
+        u1_0.restaurante_id,
+        u1_0.role,
+        u1_0.senha 
+    from
+        usuario u1_0 
+    where
+        u1_0.id=?","exception":""}
+{"timestamp":"2025-07-30 09:27:04.649","level":"DEBUG","thread":"restartedMain","correlationId":"","logger":"org.hibernate.SQL","message":"
+    /* <criteria> */ select
+        c1_0.id 
+    from
+        cliente c1_0 
+    where
+        c1_0.email=? 
+    fetch
+        first ? rows only","exception":""}
+{"timestamp":"2025-07-30 09:27:05.144","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.a.c.c.C.[Tomcat].[localhost].[/]","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'","exception":""}
+{"timestamp":"2025-07-30 09:27:05.144","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.s.web.servlet.DispatcherServlet","message":"Initializing Servlet 'dispatcherServlet'","exception":""}
+{"timestamp":"2025-07-30 09:27:05.147","level":"INFO","thread":"RMI TCP Connection(4)-127.0.0.1","correlationId":"","logger":"o.s.web.servlet.DispatcherServlet","message":"Completed initialization in 3 ms","exception":""}
+{"timestamp":"2025-07-30 09:29:06.270","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /actuator/health","exception":""}
+{"timestamp":"2025-07-30 09:29:06.313","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Secured GET /actuator/health","exception":""}
+{"timestamp":"2025-07-30 09:29:07.971","level":"DEBUG","thread":"http-nio-8080-exec-2","correlationId":"5e6dba8272ff41bf","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 09:29:08.066","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /favicon.ico","exception":""}
+{"timestamp":"2025-07-30 09:29:08.070","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 09:29:08.080","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 09:29:08.096","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 09:29:08.098","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 09:29:08.101","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 09:29:08.102","level":"DEBUG","thread":"http-nio-8080-exec-3","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 09:29:26.041","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /restaurantes","exception":""}
+{"timestamp":"2025-07-30 09:29:26.042","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 09:29:26.045","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/restaurantes?continue to session","exception":""}
+{"timestamp":"2025-07-30 09:29:26.045","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 09:29:26.047","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.security.web.FilterChainProxy","message":"Securing GET /error","exception":""}
+{"timestamp":"2025-07-30 09:29:26.049","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.s.w.a.AnonymousAuthenticationFilter","message":"Set SecurityContextHolder to anonymous SecurityContext","exception":""}
+{"timestamp":"2025-07-30 09:29:26.050","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.s.w.s.HttpSessionRequestCache","message":"Saved request http://localhost:8080/error?continue to session","exception":""}
+{"timestamp":"2025-07-30 09:29:26.050","level":"DEBUG","thread":"http-nio-8080-exec-6","correlationId":"","logger":"o.s.s.w.a.Http403ForbiddenEntryPoint","message":"Pre-authenticated entry point called. Rejecting access","exception":""}
+{"timestamp":"2025-07-30 09:31:07.235","level":"INFO","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin","message":"Application shutdown requested.","exception":""}
+{"timestamp":"2025-07-30 09:31:07.241","level":"INFO","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"o.a.coyote.http11.Http11NioProtocol","message":"Stopping ProtocolHandler ["http-nio-8080"]","exception":""}
+{"timestamp":"2025-07-30 09:31:07.269","level":"INFO","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"o.s.o.j.LocalContainerEntityManagerFactoryBean","message":"Closing JPA EntityManagerFactory for persistence unit 'default'","exception":""}
+{"timestamp":"2025-07-30 09:31:07.270","level":"DEBUG","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists cliente cascade ","exception":""}
+{"timestamp":"2025-07-30 09:31:07.292","level":"DEBUG","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists itens_pedido cascade ","exception":""}
+{"timestamp":"2025-07-30 09:31:07.294","level":"DEBUG","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists pedidos cascade ","exception":""}
+{"timestamp":"2025-07-30 09:31:07.295","level":"DEBUG","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists produto cascade ","exception":""}
+{"timestamp":"2025-07-30 09:31:07.296","level":"DEBUG","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists project cascade ","exception":""}
+{"timestamp":"2025-07-30 09:31:07.296","level":"DEBUG","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists restaurante cascade ","exception":""}
+{"timestamp":"2025-07-30 09:31:07.297","level":"DEBUG","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"org.hibernate.SQL","message":"
+    drop table if exists usuario cascade ","exception":""}
+{"timestamp":"2025-07-30 09:31:07.309","level":"WARN","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"o.s.b.f.s.DisposableBeanAdapter","message":"Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]","exception":""}
+{"timestamp":"2025-07-30 09:31:07.311","level":"INFO","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown initiated...","exception":""}
+{"timestamp":"2025-07-30 09:31:07.315","level":"INFO","thread":"RMI TCP Connection(9)-127.0.0.1","correlationId":"","logger":"com.zaxxer.hikari.HikariDataSource","message":"HikariPool-1 - Shutdown completed.","exception":""}
